@@ -1,13 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { ShowPasswordDirective } from './directives/show-password.directive';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AuthRoutingModule } from './auth-routing.module';
-
+import {
+  ForgotComponent,
+  LogInComponent,
+  ConfirmAccountComponent,
+  SignUpComponent,
+  CheckMailComponent
+ } from './index';
 
 
 @NgModule({
@@ -15,7 +18,9 @@ import { AuthRoutingModule } from './auth-routing.module';
     SignUpComponent,
     LogInComponent,
     ConfirmAccountComponent,
-    ShowPasswordDirective
+    ShowPasswordDirective,
+    ForgotComponent,
+    CheckMailComponent
   ],
   imports: [
     CommonModule,
