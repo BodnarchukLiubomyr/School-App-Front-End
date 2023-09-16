@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
 
@@ -36,5 +36,25 @@ export class AuthService {
 
   confirmAccount(token: string): Observable<any> {
     return this.http.put(AUTH_API + 'account/confirm/' + token, { responseType: 'json' });
+  }
+
+  logIn(email: string, password: string): Observable<any>{
+    return this.http.post(
+      AUTH_API + 'log-in',
+      {
+        email,
+        password
+      },
+      httpOptions
+    );
+  }
+
+  forgotPassword(email: string): Observable<any>{
+    const params = new HttpParams().set('email', email);
+    return this.http.post(
+      AUTH_API + 'password/forgot',
+      null,
+      { params }
+    );
   }
 }
