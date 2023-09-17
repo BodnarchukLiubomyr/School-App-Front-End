@@ -1,17 +1,22 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
-import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { PathNotFoundComponent } from './shared/components/path-not-found/path-not-found.component';
+import { ConfigService } from './shared/services/config.service';
+
+const appInitializerFn = (appConfig: ConfigService) => {
+  return () => {
+    return appConfig.loadAppConfig();
+  };
+};
 
 @NgModule({
   declarations: [
     AppComponent,
-    NavbarComponent,
     PathNotFoundComponent
   ],
   imports: [
@@ -20,7 +25,15 @@ import { PathNotFoundComponent } from './shared/components/path-not-found/path-n
     AuthModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [
+    ConfigService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: appInitializerFn,
+      multi: true,
+      deps: [ConfigService]
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

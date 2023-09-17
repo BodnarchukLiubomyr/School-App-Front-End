@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment.development';
+import { ConfigService } from 'src/app/shared/services/config.service';
 
 const AUTH_API = environment.authApi;
 
@@ -14,11 +15,18 @@ const httpOptions = {
 })
 export class AuthService {
 
-  constructor(private http: HttpClient) { }
+  backendApi: string;
+
+  constructor(
+    private http: HttpClient,
+    env: ConfigService)
+  {
+    this.backendApi = env.config.backendApi;
+  }
 
   signUp(firstname: string,lastname: string,email: string, password: string, passwordConfirm: string): Observable<any> {
     return this.http.post(
-      AUTH_API + 'sign-up',
+      this.backendApi + '/api/v1/school-app/sign-up',
       {
         firstname,
         lastname,
@@ -31,16 +39,19 @@ export class AuthService {
   };
 
   sendConfirmEmail(email: string): Observable<any> {
-    return this.http.get(AUTH_API + 'account/confirm/send-email/' + email);
+    return this.http.get(this.backendApi + '/api/v1/school-app/account/confirm/send-email/' + email,
+    { observe: 'response' }
+    );
   };
 
   confirmAccount(token: string): Observable<any> {
-    return this.http.put(AUTH_API + 'account/confirm/' + token, { responseType: 'json' });
+    return this.http.put(this.backendApi + '/api/v1/school-app/account/confirm/' + token,
+    { responseType: 'json' });
   }
 
   logIn(email: string, password: string): Observable<any>{
     return this.http.post(
-      AUTH_API + 'log-in',
+      this.backendApi + '/api/v1/school-app/log-in',
       {
         email,
         password
@@ -52,7 +63,7 @@ export class AuthService {
   forgotPassword(email: string): Observable<any>{
     const params = new HttpParams().set('email', email);
     return this.http.post(
-      AUTH_API + 'password/forgot',
+      this.backendApi + '/api/v1/school-app/password/forgot',
       null,
       { params }
     );

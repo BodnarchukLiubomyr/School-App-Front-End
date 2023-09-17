@@ -4,12 +4,14 @@ import { SignUpComponent } from './sign-up.component';
 import { HttpClient, HttpHandler } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ShowPasswordDirective } from '../../directives/show-password.directive';
+import { AuthService } from '../../services/auth.service';
 
 describe('SignUpComponent', () => {
   let component: SignUpComponent;
   let fixture: ComponentFixture<SignUpComponent>;
 
   beforeEach(async () => {
+    const spy = jasmine.createSpyObj('AuthService', ['signUp']);
     await TestBed.configureTestingModule({
       declarations: [
         SignUpComponent,
@@ -19,8 +21,7 @@ describe('SignUpComponent', () => {
         ReactiveFormsModule
       ],
       providers: [
-        HttpClient,
-        HttpHandler
+        { provide: AuthService, useValue: spy }
       ]
     }).compileComponents();
 
