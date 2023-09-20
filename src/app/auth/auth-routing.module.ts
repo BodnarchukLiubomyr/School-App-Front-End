@@ -1,10 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ConfirmAccountComponent } from './components/confirm-account/confirm-account.component';
-import { LogInComponent } from './components/log-in/log-in.component';
-import { SignUpComponent } from './components/sign-up/sign-up.component';
-import { CheckMailComponent } from './components/check-mail/check-mail.component';
-import { ForgotComponent } from './components/forgot/forgot.component';
+
+import {
+  ForgotComponent,
+  LogInComponent,
+  ConfirmAccountComponent,
+  SignUpComponent,
+  CheckMailComponent,
+  ChangePasswordComponent
+ } from './index';
+import { canActivateAuthGuard } from '../shared';
 
 
 const routes: Routes = [
@@ -13,6 +18,7 @@ const routes: Routes = [
   { path: 'confirm/account/:email', component: ConfirmAccountComponent },
   { path: 'password/forgot/check-mail/:email', component: CheckMailComponent },
   { path: 'password/forgot', component: ForgotComponent },
+  { path: 'password/change/:token', component: ChangePasswordComponent },
   { path: '', redirectTo: 'log-in', pathMatch: 'full' },
 ];
 @NgModule({

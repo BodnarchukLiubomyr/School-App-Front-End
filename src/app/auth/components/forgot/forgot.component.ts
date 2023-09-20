@@ -2,7 +2,7 @@ import { Component, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { StorageService } from 'src/app/shared/storage.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import { forbiddenDomain } from '../../directives/validation/forbidden-domain.directive';
 import { AuthService } from '../../services/auth.service';
 

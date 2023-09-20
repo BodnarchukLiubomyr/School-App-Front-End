@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -11,6 +11,7 @@ import { AuthService } from '../../services/auth.service';
 export class CheckMailComponent implements OnDestroy{
   private subscription: Subscription;
   email = this.route.snapshot.paramMap.get('email');
+  token = this.route.snapshot.queryParamMap.get('token');
 
   isEmailSent = true;
   isEmailConfirmed = false;
@@ -22,6 +23,32 @@ export class CheckMailComponent implements OnDestroy{
     private router: Router
   ) {
     this.subscription = new Subscription();
+  }
+
+  ngOnInit() {
+    if (this.token) {
+      this.checkToken(this.token);
+    }
+  }
+
+  checkToken(token: string): void {
+    var subscription = this.authService.checkToken(token)
+      .subscribe({
+        next: data => {
+            timer(1500)
+              .subscribe(i => {
+                this.router.navigate(['password/change/',token]);
+              })
+        },
+        error: err => {
+          if (err.status == 500) {
+            this.errorMessage = err.error.message
+              .slice(0, 100)
+              .concat(' ...');
+          }
+        }
+      });
+      this.subscription.add(subscription);
   }
 
   closeSuccessAlert() {

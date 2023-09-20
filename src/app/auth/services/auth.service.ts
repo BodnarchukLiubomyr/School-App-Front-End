@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment.development';
 import { ConfigService } from 'src/app/shared/services/config.service';
-
-const AUTH_API = environment.authApi;
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -66,6 +63,31 @@ export class AuthService {
       this.backendApi + '/api/v1/school-app/password/forgot',
       null,
       { params }
+    );
+  }
+
+  checkToken(token:string): Observable<any> {
+    const params = new HttpParams().set('token', token);
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/password/check-token',
+      params,
+      { responseType: 'json' }
+    );
+  }
+
+  changePassword(newPassword: string, newPasswordConfirm: string, token: string): Observable<any> {
+    const Options = {
+      headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token}),
+      params: new HttpParams().set('token', token),
+      responseType: 'json' as 'json'
+    };
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/password/change',
+      {
+        newPassword,
+        newPasswordConfirm,
+      },
+      Options
     );
   }
 }
