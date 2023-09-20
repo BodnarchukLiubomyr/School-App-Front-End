@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { forbiddenDomain } from '../../directives/validation/forbidden-domain.directive';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { StorageService } from 'src/app/shared/storage.service';
+import { StorageService } from 'src/app/shared/services/storage.service';
 import { regexValidator } from '../../directives/validation/multi-pattern.directive';
 import { AuthService } from '../../services/auth.service';
 
@@ -84,7 +84,7 @@ export class LogInComponent implements OnInit, OnDestroy{
         this.isLoggedIn = true;
 
         this.roles = this.storageService.getUser().roles;
-        this.router.navigate(['empty-test']);
+        this.router.navigate(['main-part']);
       },
       error: err => {
         if (err.status == 500) {

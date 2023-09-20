@@ -9,7 +9,7 @@
                 <path d="M0 0H1V14H15V15H0V0ZM2 2H5V3H2V2ZM3 5H8V6H3V5ZM5 8H8V9H5V8ZM8 11H15V12H8V11Z" />
               </svg>
             </span>
-            <span class="block ps-8 py-1 font-semibold text-lg hover:text-gray-200">CLOUDGANTT</span>
+            <span class="block ps-8 py-1 font-semibold text-lg hover:text-gray-200">SCHOOL-APP</span>
           </div>
         </div>
       </div>
@@ -19,7 +19,7 @@
         <div *ngIf="isLoggedIn()" class="relative ml-3">
           <div>
             <button type="button" class="flex rounded-full bg-gray-800 text-sm" id="user-menu-button"
-              aria-expanded="false" aria-haspopup="true" (click)="toggleMenu()" (blur)="onBlur()">
+              aria-expanded="false" aria-haspopup="true" (click)="toggleMenu()" (blur)="onBlur($event)">
               <span class="sr-only">Open user menu</span>
               <div
                 class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 hover:bg-gray-500">
@@ -44,10 +44,12 @@
             [ngClass]="{'hidden': !showMenu, 'block': showMenu}">
 
             <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
-              id="user-menu-item-0">Name</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" role="menuitem" tabindex="-1"
-              id="user-menu-item-2">Sign out</a>
+            <a class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1"
+              id="user-menu-item-0">email holder</a>
+            <a class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1"
+              id="user-menu-item-1">change password</a>
+            <a (click)="onSignOut()" class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem"
+              tabindex="-1" id="user-menu-item-2">Sign out</a>
           </div>
         </div>
       </div>

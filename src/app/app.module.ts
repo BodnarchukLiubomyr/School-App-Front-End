@@ -1,5 +1,7 @@
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -7,6 +9,9 @@ import { FormsModule } from '@angular/forms';
 import { AuthModule } from './auth/auth.module';
 import { PathNotFoundComponent } from './shared/components/path-not-found/path-not-found.component';
 import { ConfigService } from './shared/services/config.service';
+import { DeleteUserComponent } from './main-func/components/delete-user/delete-user.component';
+import { MainFuncModule } from './main-func/main-func.module';
+
 
 const appInitializerFn = (appConfig: ConfigService) => {
   return () => {
@@ -17,12 +22,15 @@ const appInitializerFn = (appConfig: ConfigService) => {
 @NgModule({
   declarations: [
     AppComponent,
-    PathNotFoundComponent
+    PathNotFoundComponent,
+    DeleteUserComponent,
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     AuthModule,
+    MainFuncModule,
     AppRoutingModule,
   ],
   providers: [
