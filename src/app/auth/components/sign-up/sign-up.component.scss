@@ -139,9 +139,14 @@
   width: 100%;
 
   background: #008ACE;
-  border: 1px solid #000000;
   border-radius: 3px;
 }
+
+.button.disabled {
+  background: #b3b2b2;
+  cursor: not-allowed;
+}
+
 
 .link-text-container {
   display: flex;

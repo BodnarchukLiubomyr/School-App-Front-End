@@ -10,7 +10,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent {
-  @Input() projectName: string = '';
+  @Input() userName: string = '';
 
   constructor(
     private mainfuncService: MainFuncService,
@@ -19,7 +19,7 @@ export class DeleteUserComponent {
 
     @Inject(MAT_DIALOG_DATA) public data:any)
     {
-      this.projectName = data.name;
+      this.userName = data.name;
     }
 
   onDeleteUser() : void{

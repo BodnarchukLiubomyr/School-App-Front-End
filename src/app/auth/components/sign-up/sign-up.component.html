@@ -132,7 +132,7 @@
         </div>
       </div>
       <div class="button-container">
-        <button type="submit" [disabled]="!form.valid" class="button">
+        <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
           <h3 class="link-text text-white">Sign up</h3>
         </button>
         <div class="link-text-container">

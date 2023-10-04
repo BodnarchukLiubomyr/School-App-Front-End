@@ -36,6 +36,9 @@
             <div *ngIf="loginForm.controls['email'].errors?.['pattern']" class="label text-red">
               Email is not valid.
             </div>
+            <div *ngIf="loginForm.controls['email'].errors?.['unavailable']" class="label text-red">
+              Email not found in the database.
+            </div>
             <div *ngIf="loginForm.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
               Unfortunately, "epam.com" domain-based email address cannot be used.
             </div>
@@ -95,13 +98,13 @@
       </div>
 
       <div class="button-container">
-        <button type="submit" [disabled]="!loginForm.valid" class="button">
+        <button type="submit" [disabled]="loginForm.invalid" class="button" [class.disabled]="loginForm.invalid">
           <h3 class="link-text text-white">Log in</h3>
         </button>
 
         <div class="link-text-container">
           <h5 class="regular-text text-grey-70">Need an account?</h5>
-          <a routerLink="/sign-up" class="link-text">Sing up.</a>
+          <a routerLink="/sign-up" class="link-text">Sign up.</a>
         </div>
       </div>
     </form>

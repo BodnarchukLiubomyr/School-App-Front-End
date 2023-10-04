@@ -4,3 +4,6 @@ export * from './components/sign-up/sign-up.component';
 export * from './components/forgot/forgot.component';
 export * from './components/check-mail/check-mail.component';
 export * from './components/change-password/change-password.component'
+
+
+export * from './services/auth.service';

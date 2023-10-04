@@ -57,12 +57,21 @@ export class AuthService {
     );
   }
 
-  forgotPassword(email: string): Observable<any>{
+  checkEmailAvailability(email: string): Observable<any>{
+    const params = new HttpParams().set('email', email);
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/check-email',
+      null,
+      { params }
+    );
+  }
+
+  forgotPassword(email: string): Observable<any> {
     const params = new HttpParams().set('email', email);
     return this.http.post(
       this.backendApi + '/api/v1/school-app/password/forgot',
-      null,
-      { params }
+      params,
+      { observe: 'response' }
     );
   }
 
