@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { AuthService } from 'src/app/auth';
 import { StorageService } from 'src/app/shared';
 
 @Component({
@@ -7,13 +9,23 @@ import { StorageService } from 'src/app/shared';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent {
-  showMenu = false;
+export class NavbarComponent implements OnDestroy{
+  showMenu: Boolean = false;
+  email: string = this.storageService.getUser().email;
+  errorMessage = '';
+  private subscription: Subscription;
 
   constructor(
     private storageService: StorageService,
     private router: Router,
-  ) { }
+    private authService: AuthService)
+    {
+      this.subscription = new Subscription();
+    }
+
+    ngOnDestroy(): void {
+      this.subscription?.unsubscribe();
+    }
 
   toggleMenu(){
     this.showMenu = !this.showMenu;
@@ -33,6 +45,6 @@ export class NavbarComponent {
   onSignOut() {
     this.storageService.clean();
     this.router.navigate(['/log-in']);
-    console.log("Sign out, clear localStorage");
+    console.log("onSignOut method, clear localStorage");
   }
 }

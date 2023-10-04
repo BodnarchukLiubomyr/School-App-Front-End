@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { forbiddenDomain } from '../../directives/validation/forbidden-domain.directive';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, debounceTime, distinctUntilChanged } from 'rxjs';
 import { StorageService } from 'src/app/shared/services/storage.service';
 import { regexValidator } from '../../directives/validation/multi-pattern.directive';
 import { AuthService } from '../../services/auth.service';
@@ -38,6 +38,7 @@ export class LogInComponent implements OnInit, OnDestroy{
 
   isLoggedIn = false;
   isLogInFailed = false;
+  isEmailAvailable = false;
   errorMessage = '';
   roles: string[] = [];
 
@@ -62,6 +63,39 @@ export class LogInComponent implements OnInit, OnDestroy{
       this.isLoggedIn = true;
       this.roles = this.storageService.getUser().roles;
     }
+
+    this.loginForm.get('email')?.valueChanges
+      .pipe(
+        debounceTime(1000),
+        distinctUntilChanged()
+      )
+      .subscribe(email => {
+        if (this.loginForm.get('email')?.valid) {
+          this.checkEmailAvailability(email!);
+        }
+      });
+  }
+
+  checkEmailAvailability(email: string): void {
+    this.authService.checkEmailAvailability(email).subscribe({
+      next: response => {
+        console.log(response);
+        if (!response) {
+          this.loginForm.get('email')?.setErrors({ unavailable: true });
+          this.isEmailAvailable = false;
+        } else {
+          this.isEmailAvailable = true;
+          this.isLogInFailed = false;
+        }
+      },
+      error: err => {
+        if (err.status == 500) {
+          this.errorMessage = err.error.message;
+          this.isLogInFailed = true;
+        }
+        console.error(err);
+      }
+    });
   }
 
   togglePassword() {

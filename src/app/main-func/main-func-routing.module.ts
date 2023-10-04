@@ -4,10 +4,12 @@ import { canActivateMainPartGuard } from '../shared/guards/can-activate-main-par
 import {
   MainPartComponent
 } from "./index"
+import { DeleteUserComponent } from './components/delete-user/delete-user.component';
 
 
 const routes: Routes = [
-  { path: 'main-part', component: MainPartComponent }
+  { path: 'main-part', component: MainPartComponent },
+  { path: 'delete-user', component: DeleteUserComponent}
 ];
 
 @NgModule({
