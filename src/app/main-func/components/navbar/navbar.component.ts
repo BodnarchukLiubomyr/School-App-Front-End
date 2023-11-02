@@ -1,6 +1,6 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, HostListener, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, timer } from 'rxjs';
 import { AuthService } from 'src/app/auth';
 import { StorageService } from 'src/app/shared';
 
@@ -23,19 +23,12 @@ export class NavbarComponent implements OnDestroy{
       this.subscription = new Subscription();
     }
 
-    ngOnDestroy(): void {
-      this.subscription?.unsubscribe();
-    }
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+  }
 
   toggleMenu(){
     this.showMenu = !this.showMenu;
-  }
-
-  onBlur(event: FocusEvent) {
-    const target = event.relatedTarget as HTMLElement;
-    if (!target || !target.closest('.block')) {
-      this.showMenu = false;
-    }
   }
 
   isLoggedIn(): boolean {
@@ -46,5 +39,15 @@ export class NavbarComponent implements OnDestroy{
     this.storageService.clean();
     this.router.navigate(['/log-in']);
     console.log("onSignOut method, clear localStorage");
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent) {
+    const targetElement = event.target as HTMLElement;
+    const menuElement = document.querySelector('.dropdown');
+
+    if (menuElement && !menuElement.contains(targetElement)) {
+      this.showMenu = false;
+    }
   }
 }

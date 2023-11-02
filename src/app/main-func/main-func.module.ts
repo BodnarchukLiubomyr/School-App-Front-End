@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { MainFuncRoutingModule } from './main-func-routing.module';
 import {
+   CreateExerciseComponent,
    MainPartComponent,
    NavbarComponent
 } from './index'
@@ -11,7 +12,8 @@ import {
 @NgModule({
   declarations: [
     MainPartComponent,
-    NavbarComponent
+    NavbarComponent,
+    CreateExerciseComponent
   ],
   imports: [
     CommonModule,

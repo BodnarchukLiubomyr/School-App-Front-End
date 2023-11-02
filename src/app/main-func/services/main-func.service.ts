@@ -30,4 +30,17 @@ export class MainFuncService {
       }
     );
   }
+
+  createExercise(description: string, date: Date, className: string, subjectName: string): Observable<any>{
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/create-exercise',
+      {
+        description,
+        date,
+        className,
+        subjectName
+      },
+      httpOptions
+    );
+  }
 }
