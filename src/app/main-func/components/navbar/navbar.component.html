@@ -1,58 +1,36 @@
-<nav class="bg-gray-800">
-  <div class="mx-auto w-full px-2 sm:px-6 lg:px-8">
-    <div class="relative flex h-16 items-center justify-between">
-      <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-        <div class="flex flex-shrink-0 items-center">
-          <div class="text-gray-300 px-3 py-2 relative">
-            <span class="absolute top-0 bottom-0 left-0 px-3 py-3">
-              <svg class="fill-current h-6 w-6" viewBox="0 0 15 15" xmlns="http://www.w3.org/2000/svg">
-                <path d="M0 0H1V14H15V15H0V0ZM2 2H5V3H2V2ZM3 5H8V6H3V5ZM5 8H8V9H5V8ZM8 11H15V12H8V11Z" />
-              </svg>
-            </span>
-            <span class="block ps-8 py-1 font-semibold text-lg hover:text-gray-200">SCHOOL-APP</span>
+<nav class="header">
+  <a class="logo" routerLink="/main-part">
+    <span class="logo-icon-container">
+      <svg class="logo-icon" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+        <use xlink:href="assets/icons.svg#app-logo"></use>
+      </svg>
+    </span>
+    <span class="logo-text-container">
+      <div class="logo-text-big">School-App</div>
+      <div class="logo-text-small">Education</div>
+    </span>
+  </a>
+  <div class="content">
+    <div class="menu"></div>
+
+            <!-- Profile dropdown -->
+    <div *ngIf="isLoggedIn()" class="dropdown">
+      <div class="dropdown-items-container">
+        <button type="button" id="user-menu-button" (click)="toggleMenu()">
+          <div class="account-icons-container">
+            <svg class="account-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <use xlink:href="assets/icons.svg#account-icon"></use>
+            </svg>
+            <svg class="menu-down-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <use xlink:href="assets/icons.svg#menu-down-icon"></use>
+            </svg>
           </div>
+        </button>
         </div>
-      </div>
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
-        <!-- Profile dropdown -->
-        <div *ngIf="isLoggedIn()" class="relative ml-3">
-          <div>
-            <button type="button" class="flex rounded-full bg-gray-800 text-sm" id="user-menu-button"
-              aria-expanded="false" aria-haspopup="true" (click)="toggleMenu()" (blur)="onBlur($event)">
-              <span class="sr-only">Open user menu</span>
-              <div
-                class="relative w-10 h-10 overflow-hidden bg-gray-100 rounded-full dark:bg-gray-600 hover:bg-gray-500">
-                <svg class="absolute w-12 h-12 text-gray-400 -left-1" fill="currentColor" viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd">
-                  </path>
-                </svg>
-              </div>
-              <div class="px-1 py-3">
-                <svg class="hs-dropdown-open:rotate-180 w-3 h-3 text-gray-600" width="16" height="16"
-                  viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M2 5L8.16086 10.6869C8.35239 10.8637 8.64761 10.8637 8.83914 10.6869L15 5"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-                </svg>
-              </div>
-            </button>
-          </div>
-          <div
-            class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-            role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1"
-            [ngClass]="{'hidden': !showMenu, 'block': showMenu}">
-
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1"
-              id="user-menu-item-0">{{email}}</a>
-            <a class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem" tabindex="-1"
-              id="user-menu-item-1">change password</a>
-            <a (click)="onSignOut()" class="block px-4 py-2 text-sm text-gray-700 hover:cursor-pointer hover:bg-gray-100" role="menuitem"
-              tabindex="-1" id="user-menu-item-2">Sign out</a>
-          </div>
+        <div class="dropdown-menu" [ngClass]="{'hidden': !showMenu, 'block': showMenu}">
+          <a class="dropdown-menu-section section-text" id="user-menu-item-0">{{email}}</a>
+          <a (click)="onSignOut()" class="dropdown-menu-section section-text" id="user-menu-item-2">Sign out</a>
         </div>
       </div>
     </div>
-  </div>
 </nav>
