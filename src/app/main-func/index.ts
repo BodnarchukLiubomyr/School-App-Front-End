@@ -1,6 +1,15 @@
 import { from } from 'rxjs'
 
 export * from './components/main-part/main-part.component'
+export * from './components/work-with-class/work-with-class.component'
 export * from './components/navbar/navbar.component'
 
 export * from './components/create-exercise/create-exercise.component'
+export * from './components/subject-view/subject-view.component'
+export * from './components/create-subject/create-subject.component'
+export * from './components/main-part/subjects/subjects.component'
+export * from './components/create-class/create-class.component'
+export * from './components/add-user-to-class/add-user-to-class.component'
+export * from './components/create-group/create-group.component'
+export * from './components/add-user-to-group/add-user-to-group.component'
+export * from './components/file-sending/file-sending.component'

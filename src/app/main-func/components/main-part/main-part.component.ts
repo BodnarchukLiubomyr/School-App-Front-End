@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -6,20 +7,21 @@ import { Subscription } from 'rxjs';
   templateUrl: './main-part.component.html',
   styleUrls: ['./main-part.component.scss']
 })
-export class MainPartComponent implements OnInit,OnDestroy{
-  private subscription: Subscription;
+export class MainPartComponent{
 
   constructor(
-  ) {
-    this.subscription = new Subscription();
+    private router: Router
+  ) {}
+
+  navigateToCreateExercise(): void {
+    this.router.navigate(['create-exercise']);
   }
 
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+  navigateToWorkWithClass(): void{
+    this.router.navigate(['work-with-class']);
   }
 
-  ngOnInit(): void {
-
+  navigateToCreateSubject(): void {
+    this.router.navigate(['create-subject']);
   }
-
 }
