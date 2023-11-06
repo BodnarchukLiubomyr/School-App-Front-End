@@ -1,6 +1,6 @@
 <div class="flex-column-frame">
   <div class="alert-container">
-    <div class="alert-body alert-bg-error" role="alert" *ngIf="isCreateGroupFailed">
+    <div class="alert-body alert-bg-error" role="alert" *ngIf="isCreateSubjectFailed">
       <span class="alert-icon-container">
         <svg class="alert-icon icon-error-fill" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <use xlink:href="assets/icons.svg#error-icon"></use>
@@ -14,32 +14,10 @@
       </span>
     </div>
   </div>
-  <div class="create-group-form">
+  <div class="create-subject-form">
     <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
       <div class="title-input">
-        <h3 class="title-text">Create group</h3>
-        <div class="field-container">
-          <div>
-            <label for="groupName" class="label">Group name</label>
-            <label for="password" class="label text-red">*</label>
-          </div>
-          <div class="field"
-            [ngClass]="{'border-error': form.controls['groupName'].invalid && (form.controls['groupName'].dirty || form.controls['groupName'].touched)}">
-            <input class="field-text" id="groupName" name="groupName" type="groupName" autocomplete="groupName" formControlName="groupName">
-          </div>
-          <div class="error-label-container"
-            *ngIf="form.controls['groupName'].invalid && (form.controls['groupName'].dirty || form.controls['groupName'].touched)">
-            <div *ngIf="form.controls['groupName'].errors?.['required']" class="label text-red">
-              Enter a valid group name.
-            </div>
-            <div *ngIf="form.controls['groupName'].errors?.['pattern']" class="label text-red">
-              Group name is not valid.
-            </div>
-            <div *ngIf="form.controls['groupName'].errors?.['maxlength']" class="label text-red">
-              Group name should contain at most 60 symbols.
-            </div>
-          </div>
-        </div>
+        <h3 class="title-text">Create subject</h3>
         <div class="field-container">
           <div>
             <label for="subjectName" class="label">Subject name</label>
@@ -56,6 +34,28 @@
             </div>
             <div *ngIf="form.controls['subjectName'].errors?.['pattern']" class="label text-red">
               Subject name is not valid.
+            </div>
+          </div>
+        </div>
+        <div class="field-container">
+          <div>
+            <label for="email" class="label">E-mail</label>
+            <label for="email" class="label text-red">*</label>
+          </div>
+          <div class="field"
+            [ngClass]="{'border-error': form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)}">
+            <input class="field-text" id="email" name="email" type="email" autocomplete="email" formControlName="email">
+          </div>
+          <div class="error-label-container"
+            *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+            <div *ngIf="form.controls['email'].errors?.['required']" class="label text-red">
+              Enter a valid email.
+            </div>
+            <div *ngIf="form.controls['email'].errors?.['pattern']" class="label text-red">
+              Email is not valid.
+            </div>
+            <div *ngIf="form.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
+              Unfortunately, "epam.com" domain-based email address cannot be used.
             </div>
           </div>
         </div>
@@ -87,4 +87,3 @@
     </form>
   </div>
 </div>
-

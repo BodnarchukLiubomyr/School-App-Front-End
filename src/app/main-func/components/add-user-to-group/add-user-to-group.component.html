@@ -1,6 +1,6 @@
 <div class="flex-column-frame">
   <div class="alert-container">
-    <div class="alert-body alert-bg-error" role="alert" *ngIf="isCreateGroupFailed">
+    <div class="alert-body alert-bg-error" role="alert" *ngIf="isAddUserToGroupFailed">
       <span class="alert-icon-container">
         <svg class="alert-icon icon-error-fill" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
           <use xlink:href="assets/icons.svg#error-icon"></use>
@@ -14,10 +14,11 @@
       </span>
     </div>
   </div>
-  <div class="create-group-form">
+
+  <div class="add-user-to-group-form">
     <form [formGroup]="form" novalidate (ngSubmit)="onSubmit()">
       <div class="title-input">
-        <h3 class="title-text">Create group</h3>
+        <h3 class="title-text">Add user to group</h3>
         <div class="field-container">
           <div>
             <label for="groupName" class="label">Group name</label>
@@ -42,20 +43,28 @@
         </div>
         <div class="field-container">
           <div>
-            <label for="subjectName" class="label">Subject name</label>
-            <label for="password" class="label text-red">*</label>
+            <label for="email" class="label">E-mail</label>
+            <label for="email" class="label text-red">*</label>
           </div>
+
           <div class="field"
-            [ngClass]="{'border-error': form.controls['subjectName'].invalid && (form.controls['subjectName'].dirty || form.controls['subjectName'].touched)}">
-            <input class="field-text" id="subjectName" name="subjectName" type="subjectName" autocomplete="subjectName" formControlName="subjectName">
+            [ngClass]="{'border-error': form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)}">
+            <input class="field-text" id="email" name="email" type="email" autocomplete="email" formControlName="email">
           </div>
+
           <div class="error-label-container"
-            *ngIf="form.controls['subjectName'].invalid && (form.controls['subjectName'].dirty || form.controls['subjectName'].touched)">
-            <div *ngIf="form.controls['subjectName'].errors?.['required']" class="label text-red">
-              Enter a valid subject name.
+            *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+
+            <div *ngIf="form.controls['email'].errors?.['required']" class="label text-red">
+              Enter a valid email.
             </div>
-            <div *ngIf="form.controls['subjectName'].errors?.['pattern']" class="label text-red">
-              Subject name is not valid.
+
+            <div *ngIf="form.controls['email'].errors?.['pattern']" class="label text-red">
+              Email is not valid.
+            </div>
+
+            <div *ngIf="form.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
+              Unfortunately, "epam.com" domain-based email address cannot be used.
             </div>
           </div>
         </div>
@@ -64,12 +73,14 @@
             <label for="className" class="label">Class name</label>
             <label for="password" class="label text-red">*</label>
           </div>
+
           <div class="field"
             [ngClass]="{'border-error': form.controls['className'].invalid && (form.controls['className'].dirty || form.controls['className'].touched)}">
             <input class="field-text" id="className" name="className" type="className" autocomplete="className" formControlName="className">
           </div>
           <div class="error-label-container"
             *ngIf="form.controls['className'].invalid && (form.controls['className'].dirty || form.controls['className'].touched)">
+
             <div *ngIf="form.controls['className'].errors?.['required']" class="label text-red">
               Enter a valid class name.
             </div>
@@ -78,13 +89,17 @@
             </div>
           </div>
         </div>
-        <div class="button-container">
-          <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
-            <h3 class="link-text text-white">Create</h3>
-          </button>
-        </div>
+      </div>
+
+      <div class="button-container">
+        <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
+          <h3 class="link-text text-white">Add user</h3>
+        </button>
+
+        <button routerLink="/main-part" class="button-white">
+          <h3 class="link-text text-blue">Back</h3>
+        </button>
       </div>
     </form>
   </div>
 </div>
-

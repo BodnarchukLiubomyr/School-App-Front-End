@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 
 const USER_KEY = 'auth-user';
+const SUBJECTS_KEY = 'user-subjects';
 
 @Injectable({
   providedIn: 'root'
@@ -34,5 +35,19 @@ export class StorageService {
     }
 
     return false;
+  }
+
+  public saveSubject(subject: any): void {
+    window.localStorage.removeItem(SUBJECTS_KEY);
+    window.localStorage.setItem(SUBJECTS_KEY, JSON.stringify(subject));
+  }
+
+  public getSubject(): any {
+    const subject = window.localStorage.getItem(SUBJECTS_KEY);
+    if (subject) {
+      return JSON.parse(subject);
+    }
+
+    return {};
   }
 }

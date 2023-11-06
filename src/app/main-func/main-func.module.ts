@@ -1,11 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { MainFuncRoutingModule } from './main-func-routing.module';
 import {
-   CreateExerciseComponent,
-   MainPartComponent,
-   NavbarComponent
+  AddUserToClassComponent,
+  CreateClassComponent,
+  CreateExerciseComponent,
+  MainPartComponent,
+  NavbarComponent,
+  SubjectViewComponent,
+  SubjectsComponent,
+  WorkWithClassComponent,
+  CreateSubjectComponent,
+  CreateGroupComponent,
+  AddUserToGroupComponent,
+  FileSendingComponent
 } from './index'
 
 
@@ -13,10 +23,20 @@ import {
   declarations: [
     MainPartComponent,
     NavbarComponent,
-    CreateExerciseComponent
+    CreateExerciseComponent,
+    SubjectsComponent,
+    SubjectViewComponent,
+    CreateClassComponent,
+    AddUserToClassComponent,
+    WorkWithClassComponent,
+    CreateSubjectComponent,
+    CreateGroupComponent,
+    AddUserToGroupComponent,
+    FileSendingComponent
   ],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
     MainFuncRoutingModule
   ]
 })

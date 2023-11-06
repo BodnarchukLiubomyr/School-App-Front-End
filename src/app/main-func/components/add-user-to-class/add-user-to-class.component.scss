@@ -1,14 +1,14 @@
-.create-group-form {
+.add-user-to-class-form {
 
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: 35px 35px;
+  padding: 40px 35px;
   gap: 32px;
 
   position: relative;
   width: 340.25px;
-  height: 500px;
+  height: 400px;
 
   background: #FFFFFF;
 
@@ -24,7 +24,7 @@
 
   position: relative;
   width: 270.25px;
-  height: 435px;
+  height: 214px;
 }
 
 .field-container {
@@ -124,7 +124,7 @@
 .button-container {
   display: flex;
   flex-direction: column;
-  padding-top: 20px;
+  padding-top: 10px;
   gap: 10px;
 }
 
@@ -147,17 +147,44 @@
   cursor: not-allowed;
 }
 
+.button-white {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 24px;
+  gap: 10px;
+  width: 100%;
+  border-color: #008ACE;
+  border-width: 2px;
+  background: #f4f7f8;
+  border-radius: 3px;
+}
 
 .link-text-container {
   display: flex;
   flex-direction: row;
   gap: 5px;
+
+}
+
+.link-text-container__flex-end {
+  @extend .link-text-container;
+  justify-content: flex-end;
 }
 
 .text-white {
   color: #FFFFFF;
 }
 
-.text-grey {
+.text-blue {
+  color: #008ACE;
+}
+
+.text-grey-70 {
   color: #474A59;
+}
+
+.text-grey-60 {
+  color: #6C6F80;
 }
