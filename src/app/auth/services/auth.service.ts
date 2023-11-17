@@ -35,6 +35,20 @@ export class AuthService {
     );
   };
 
+  signUpTeacher(firstname: string,lastname: string,email: string, password: string, passwordConfirm: string): Observable<any> {
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/sign-up-teacher',
+      {
+        firstname,
+        lastname,
+        email,
+        password,
+        passwordConfirm
+      },
+      httpOptions
+    );
+  };
+
   sendConfirmEmail(email: string): Observable<any> {
     return this.http.get(this.backendApi + '/api/v1/school-app/account/confirm/send-email/' + email,
     { observe: 'response' }

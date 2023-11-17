@@ -1,0 +1,6 @@
+<p>My group</p>
+<button [routerLink]="['/group-chat', groups?.id]">{{groups?.groupName}}</button>
+
+<div *ngIf="errorMessage">
+  <p>Error: {{ errorMessage }}</p>
+</div>

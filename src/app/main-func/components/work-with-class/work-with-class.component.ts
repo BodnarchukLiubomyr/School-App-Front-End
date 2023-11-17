@@ -28,12 +28,8 @@ export class WorkWithClassComponent implements OnDestroy{
     this.router.navigate(['add-user-to-class'])
   }
 
-  navigateToCreateGroup(){
-    this.router.navigate(['create-group'])
-  }
-
-  navigateToAddUserToGroup(){
-    this.router.navigate(['add-user-to-group'])
+  navigateToCreateSubject(): void {
+    this.router.navigate(['create-subject']);
   }
 
   transferUsers(): void {

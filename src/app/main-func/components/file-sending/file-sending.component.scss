@@ -1,10 +1,10 @@
-.file-upload {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
+.file-input {
+  display: none;
 }
 
-button {
-  margin-top: 10px;
+.processing {
+  background-color: #EBEDF5;
+  width: 500px;
+  height: 250px;
 }
+

@@ -12,6 +12,7 @@ import { StorageService } from 'src/app/shared';
 export class NavbarComponent implements OnDestroy{
   showMenu: Boolean = false;
   email: string = this.storageService.getUser().email;
+  userId: string = this.storageService.getUser().id;
   errorMessage = '';
   private subscription: Subscription;
 
@@ -33,6 +34,10 @@ export class NavbarComponent implements OnDestroy{
 
   isLoggedIn(): boolean {
     return this.storageService.isLoggedIn();
+  }
+
+  getChats(){
+    this.router.navigate(['/get-chats',this.userId]);
   }
 
   onSignOut() {

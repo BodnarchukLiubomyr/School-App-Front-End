@@ -1,4 +1,33 @@
-<div class="file-upload">
+<!-- <div class="file-upload">
   <input type="file" (change)="onFileSelected($event)" />
   <button (click)="uploadFile()">Upload</button>
+</div> -->
+<div
+  class="w-full h-[259px] px-[95px] py-5 bg-white border-2 border-dashed border-gray-300 flex-col justify-center items-center gap-2 inline-flex"
+  [class.processing]="processing" (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+  (drop)="onDropSuccess($event)">
+
+  <div class="w-24 h-24 relative py-5">
+    <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <use xlink:href="assets/icons.svg#upload-drag-drop-icon"></use>
+    </svg>
+  </div>
+
+  <div class="w-[345px] h-[106px] flex flex-col items-center justify-center space-y-2">
+    <div>
+      <p class="text-center text-zinc-700 text-[16px] font-normal leading-normal">Save file here or
+        <input type="file" class="file-input" (change)="onFileSelected($event)" #fileUpload>
+        <button (click)="fileUpload.click()" class="text-sky-600 text-[16px] font-semibold leading-normal">
+          browse
+        </button>
+        from your device
+      </p>
+      <P>Allow .doc,.docx,.pptx,.pdf format of file</P>
+    </div>
+  </div>
+
+
+  <div *ngIf="errorMessage" class="text-red-500 text-sm font-semibold mt-2">
+    {{ errorMessage }}
+  </div>
 </div>

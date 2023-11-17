@@ -1,0 +1,13 @@
+<div class="chat-container">
+  <div class="chat-history">
+    <div *ngFor="let message of chatHistory" class="message">
+      <span class="user-name">{{ message.userName }}:</span>
+      <span class="message-content">{{ message.message }}</span>
+    </div>
+  </div>
+  <div class="message-input">
+    <!-- Use (input) instead of (change) for immediate updates -->
+    <textarea [value]="newMessageContent || ''" (input)="onMessageInput($event)" placeholder="Type your message..."></textarea>
+    <button (click)="sendMessage()">Send Message</button>
+  </div>
+</div>

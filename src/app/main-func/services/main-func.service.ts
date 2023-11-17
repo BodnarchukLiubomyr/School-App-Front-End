@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable} from 'rxjs';
 import { ConfigService } from 'src/app/shared';
+import { saveAs } from 'file-saver';
 
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -106,6 +107,13 @@ export class MainFuncService {
     );
   }
 
+  getGroup(subjectId: string, userId: string): Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-group/'+subjectId+'/'+userId,
+      { responseType: 'json'}
+    )
+  }
+
   createExercise(name:string,description: string, date: string, className: string, subjectName: string): Observable<any>{
     return this.http.post(
       this.backendApi + '/api/v1/school-app/create-exercise',
@@ -125,5 +133,98 @@ export class MainFuncService {
       this.backendApi + '/api/v1/school-app/get-exercises/'+subjectId,
       { responseType: 'json' }
     )
+  }
+
+  uploadFile(userId: string, exerciseId:string,token: string,file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.http.post(
+      this.backendApi+ '/api/v1/school-app/files/upload/' + userId+'/'+ exerciseId,
+      formData,
+      {
+        headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }),
+        observe: 'response'
+      }
+    );
+  }
+
+  downloadFile(fileName: string): void{
+   this.http.get(
+      this.backendApi + '/api/v1/school-app/files/download/' + fileName,
+      { responseType: 'blob' })
+      .subscribe((response: Blob) => {
+        saveAs(response, fileName);
+      });
+  }
+
+  getFileWork(exerciseId: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-works/'+ exerciseId,
+      {responseType: "json"}
+    )
+  }
+
+  fileMarks(fileName: string, mark: string):Observable<any>{
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/rate-file/'+ fileName,
+      {mark: +mark},
+      httpOptions
+    )
+  }
+
+  createChat(userId: string,lastname: string,firstname: string): Observable<any>{
+    return this.http.post(
+      this.backendApi + '/api/v1/school-app/create-chat/' + userId,
+      {
+        lastname,
+        firstname
+      },
+      httpOptions
+    );
+  }
+
+  getAllUserChats(userId: string): Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-chats/'+ userId,
+      { responseType: "json"}
+    );
+  }
+
+  getChatHistory(chatId: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/chat/'+chatId,
+      {
+        responseType: "json"
+      }
+    );
+  }
+
+  sendMessage(chatId: string, userId: string, content: string): Observable<any> {
+    return this.http.post(this.backendApi+'/api/v1/school-app/send/'+ chatId +'/'+ userId,
+    {
+      content,
+      observe: 'response'
+    },
+      httpOptions
+    );
+  }
+
+  getGroupChatHistory(groupId: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/group-history/'+groupId,
+      {
+        responseType: "json"
+      }
+    );
+  }
+
+  sendGroupMessage(groupId: string, userId: string, content: string): Observable<any> {
+    return this.http.post(this.backendApi+'/api/v1/school-app/group-send/'+ groupId +'/'+ userId,
+    {
+      content,
+      observe: 'response'
+    },
+      httpOptions
+    );
   }
 }
