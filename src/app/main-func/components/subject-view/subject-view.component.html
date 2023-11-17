@@ -1,9 +1,11 @@
 <div *ngIf="exercises && exercises.length > 0; else noExercises">
   <div *ngFor="let exercise of exercises" class="exercise-card">
     <h2>Exercise Details</h2>
-    <p>Name of Exercise: {{ exercise.description }}</p>
+    <p>Name of Exercise: {{ exercise.name }}</p>
     <p>Description: {{ exercise.description }}</p>
     <p>Date: {{ exercise.date }}</p>
+    <button [routerLink]="['/work-rating', exercise.id]" *ngIf="isTeacher()">Check students' works</button>
+    <app-file-sending [exerciseId]="exercise.id"></app-file-sending>
   </div>
 </div>
 

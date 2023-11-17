@@ -49,6 +49,7 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
       next: data => {
         console.log(data);
         this.exercises = data;
+        this.storageService.saveExercise(data);/////////////////////
       },
       error: err => {
         if (err.status == 500) {
@@ -56,6 +57,12 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
         }
       }
     });
+  }
+
+  isTeacher(): boolean {
+    const userRole = this.storageService.getUser().role;
+    console.log("Role:",userRole);
+    return userRole === 'TEACHER';
   }
 
   ngOnDestroy(): void {

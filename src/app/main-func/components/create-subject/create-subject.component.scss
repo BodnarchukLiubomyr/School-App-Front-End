@@ -8,7 +8,7 @@
 
   position: relative;
   width: 340.25px;
-  height: 620px;
+  height: 480px;
 
   background: #FFFFFF;
 
@@ -124,8 +124,9 @@
 .button-container {
   display: flex;
   flex-direction: column;
-  padding-top: 44px;
+  padding-top: 25px;
   gap: 10px;
+  margin: 0 auto;
 }
 
 .button {

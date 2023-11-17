@@ -1,1 +1,38 @@
-<p>work-rating works!</p>
+<!-- <div *ngIf="fileWorks && fileWorks.length > 0; else noFileWorks">
+  <h2>File Works</h2>
+  <ul>
+    <li *ngFor="let fileWork of fileWorks">
+      <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
+      <button [routerLink]="['/file-marks', fileWork.fileName]">Rate file</button>
+    </li>
+  </ul>
+</div> -->
+<div *ngIf="fileWorks && fileWorks.length > 0; else noFileWorks">
+  <h2>File Works</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>File Name</th>
+        <th>Rate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fileWork of fileWorks">
+        <td>
+          <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
+        </td>
+        <td>
+          <button [routerLink]="['/file-marks', fileWork.fileName]">Rate file</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noFileWorks>
+  <p>No exercises available.</p>
+</ng-template>
+
+<div *ngIf="errorMessage">
+  <p>Error: {{ errorMessage }}</p>
+</div>

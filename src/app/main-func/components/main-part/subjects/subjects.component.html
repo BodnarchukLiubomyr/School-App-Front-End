@@ -2,7 +2,11 @@
   <div *ngFor="let subject of subjects" class="subject-card">
     <h3>Subject: {{ subject.name }}</h3>
     <p>Teacher: {{ subject.teacherLastname }} {{ subject.teacherFirstname }}</p>
-    <button [routerLink]="['/subject-view', subject.id]">Go to Subject View</button>
+    <button class="button" [routerLink]="['/subject-view', subject.id]">Go to Subject View</button>
+    <p>My group</p>
+    <button class="button" [routerLink]="['/get-group', subject.id, userId]">Go to Group</button>
+
+    <!-- <app-get-group [subjectId] = "subject.id" [userId]= "userId"></app-get-group> -->
   </div>
 </div>
 

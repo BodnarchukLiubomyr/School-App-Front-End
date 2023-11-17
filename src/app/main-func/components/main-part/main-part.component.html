@@ -3,6 +3,26 @@
   <h3 class="title-layout-text-holder">My subjects</h3>
 </div>
 <app-subjects></app-subjects>
-<button (click)="navigateToCreateExercise()">Create exercise</button>>
-<button (click)="navigateToWorkWithClass()">Work with class</button>>
-<button (click)="navigateToCreateSubject()">Create subject</button>
+
+<ng-container *ngIf="isTeacher">
+  <button class="button" (click)="navigateToCreateExercise()" *ngIf="isTeacher()">Create exercise</button>
+  <div class="button-separator"></div>
+  <button class="button" (click)="navigateToCreateGroup()" *ngIf="isTeacher()">Create group</button>
+  <div class="button-separator"></div>
+  <button class="button" (click)="navigateToAddUserToGroup()" *ngIf="isTeacher()">Add student to group</button>
+</ng-container>
+
+<ng-container *ngIf="isAdmin">
+  <button class="button" (click)="navigateToWorkWithClass()" *ngIf="isAdmin()">Work with class</button>
+  <div class="button-separator"></div>
+  <button class="button" (click)="navigateToSignUpUser()" *ngIf="isAdmin()">Sign-up user</button>
+  <div class="button-separator"></div>
+  <button class="button" (click)="navigateToSignUpTeacher()" *ngIf="isAdmin()">Sign-up teacher</button>
+</ng-container>
+
+
+<ng-container *ngIf="isStudent">
+  <button class="button" (click)="navigateToCreateChat()">Create chat</button>
+  <div class="button-separator"></div>
+  <button class="button" (click)="navigateToGetChats()">My Chats</button>
+</ng-container>

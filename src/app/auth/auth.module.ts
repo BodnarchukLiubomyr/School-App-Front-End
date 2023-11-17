@@ -10,7 +10,8 @@ import {
   ConfirmAccountComponent,
   SignUpComponent,
   CheckMailComponent,
-  ChangePasswordComponent
+  ChangePasswordComponent,
+  SignUpTeacherComponent
  } from './index';
 
 
@@ -22,7 +23,8 @@ import {
     ShowPasswordDirective,
     ForgotComponent,
     CheckMailComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    SignUpTeacherComponent
   ],
   imports: [
     CommonModule,

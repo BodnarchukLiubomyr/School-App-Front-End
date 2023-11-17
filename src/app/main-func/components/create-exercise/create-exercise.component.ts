@@ -45,7 +45,7 @@ export class CreateExerciseComponent implements OnDestroy{
     }],
   });
 
-  isCreateExerciseFailed = true;
+  isCreateExerciseFailed = false;
   errorMessage = '';
   private subscription: Subscription | undefined;
 
@@ -65,7 +65,6 @@ export class CreateExerciseComponent implements OnDestroy{
     this.subscription = this.mainFuncService.createExercise(name!,description!,date!,className!,subjectName!).subscribe({
       next: data => {
         console.log(data);
-        this.isCreateExerciseFailed = false;
         this.router.navigate(["main-part"]);
       },
       error: err => {

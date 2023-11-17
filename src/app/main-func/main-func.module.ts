@@ -15,7 +15,14 @@ import {
   CreateSubjectComponent,
   CreateGroupComponent,
   AddUserToGroupComponent,
-  FileSendingComponent
+  GetGroupComponent,
+  FileSendingComponent,
+  WorkRatingComponent,
+  FileMarksComponent,
+  CreateChatComponent,
+  ChatComponent,
+  GetChatsComponent,
+  GroupChatComponent
 } from './index'
 
 
@@ -32,7 +39,14 @@ import {
     CreateSubjectComponent,
     CreateGroupComponent,
     AddUserToGroupComponent,
-    FileSendingComponent
+    GetGroupComponent,
+    FileSendingComponent,
+    WorkRatingComponent,
+    FileMarksComponent,
+    CreateChatComponent,
+    ChatComponent,
+    GetChatsComponent,
+    GroupChatComponent
   ],
   imports: [
     CommonModule,

@@ -7,7 +7,8 @@ import {
   ConfirmAccountComponent,
   SignUpComponent,
   CheckMailComponent,
-  ChangePasswordComponent
+  ChangePasswordComponent,
+  SignUpTeacherComponent
  } from './index';
 import { canActivateAuthGuard } from '../shared';
 
@@ -15,6 +16,7 @@ import { canActivateAuthGuard } from '../shared';
 const routes: Routes = [
   { path: 'log-in', component: LogInComponent },
   { path: 'sign-up', component: SignUpComponent },
+  { path: 'sign-up-teacher', component: SignUpTeacherComponent},
   { path: 'confirm/account/:email', component: ConfirmAccountComponent },
   { path: 'password/forgot/check-mail/:email', component: CheckMailComponent },
   { path: 'password/forgot', component: ForgotComponent },
