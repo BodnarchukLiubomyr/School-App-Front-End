@@ -4,24 +4,32 @@
 </div>
 <app-subjects></app-subjects>
 
-<ng-container *ngIf="isTeacher">
-  <button class="button" (click)="navigateToCreateExercise()" *ngIf="isTeacher()">Create exercise</button>
-  <div class="button-separator"></div>
-  <button class="button" (click)="navigateToCreateGroup()" *ngIf="isTeacher()">Create group</button>
-  <div class="button-separator"></div>
-  <button class="button" (click)="navigateToAddUserToGroup()" *ngIf="isTeacher()">Add student to group</button>
-</ng-container>
+<div class="center-container" *ngIf="isAdmin()">
+  <ng-container *ngIf="isAdmin()">
+    <div class="column" *ngIf="isAdmin()">
+      <p>Education</p>
+      <button class="button" (click)="navigateToCreateClass()" *ngIf="isAdmin()">Create class</button>
+      <div class="button-separator"></div>
+      <button class="button" (click)="navigateToAddUserToClass()" *ngIf="isAdmin()">Add student to class</button>
+      <div class="button-separator"></div>
+      <button class="button" (click)="transferUsers()" *ngIf="isAdmin()">Transfer students to next classes</button>
+      <div class="button-separator"></div>
+      <button class="button" (click)="navigateToCreateSubject()" *ngIf="isAdmin">Create subject</button>
+    </div>
 
-<ng-container *ngIf="isAdmin">
-  <button class="button" (click)="navigateToWorkWithClass()" *ngIf="isAdmin()">Work with class</button>
-  <div class="button-separator"></div>
-  <button class="button" (click)="navigateToSignUpUser()" *ngIf="isAdmin()">Sign-up user</button>
-  <div class="button-separator"></div>
-  <button class="button" (click)="navigateToSignUpTeacher()" *ngIf="isAdmin()">Sign-up teacher</button>
-</ng-container>
+    <div class="column" *ngIf="isAdmin()">
+      <p>Registration</p>
+      <!-- <button class="button" (click)="navigateToWorkWithClass()" *ngIf="isAdmin()">Work with class</button>
+      <div class="button-separator"></div> -->
+      <button class="button" (click)="navigateToSignUpUser()" *ngIf="isAdmin()">Sign-up user</button>
+      <div class="button-separator"></div>
+      <button class="button" (click)="navigateToSignUpTeacher()" *ngIf="isAdmin()">Sign-up teacher</button>
+    </div>
+  </ng-container>
+</div>
 
 
-<ng-container *ngIf="isStudent">
+<ng-container>
   <button class="button" (click)="navigateToCreateChat()">Create chat</button>
   <div class="button-separator"></div>
   <button class="button" (click)="navigateToGetChats()">My Chats</button>

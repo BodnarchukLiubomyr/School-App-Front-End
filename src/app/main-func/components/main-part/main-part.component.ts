@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/shared';
+import { MainFuncService } from '../../services/main-func.service';
 
 @Component({
   selector: 'app-main-part',
@@ -13,11 +14,16 @@ export class MainPartComponent implements OnInit{
   userId = '';
   userRole: string | undefined;
   roles: string[] = [];
+  errorMessage = '';
+  private subscription: Subscription;
 
   constructor(
     private router: Router,
-    private storageService: StorageService
-  ) {}
+    private storageService: StorageService,
+    private mainFuncService: MainFuncService,
+  ) {
+    this.subscription = new Subscription();
+  }
 
   ngOnInit(): void {
     this.userId = this.storageService.getUser().id;
@@ -71,5 +77,32 @@ export class MainPartComponent implements OnInit{
 
   navigateToSignUpTeacher():void{
     this.router.navigate(['sign-up-teacher'])
+  }
+
+  navigateToCreateClass(){
+    this.router.navigate(['create-class'])
+  }
+
+  navigateToAddUserToClass(){
+    this.router.navigate(['add-user-to-class'])
+  }
+
+  navigateToCreateSubject(): void {
+    this.router.navigate(['create-subject']);
+  }
+
+  transferUsers(): void {
+      this.subscription = this.mainFuncService.transferUsersToNextClass()
+      .subscribe({
+        next: data => {
+          console.log(data);
+          this.router.navigate(['main-part'])
+        },
+        error: err => {
+          if (err.status == 500) {
+            this.errorMessage = err.error.message;
+          }
+        }
+      });
   }
 }

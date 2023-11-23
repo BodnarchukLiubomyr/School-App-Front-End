@@ -32,7 +32,7 @@ export class CreateGroupComponent {
     }]
   });
 
-  isCreateGroupFailed = true;
+  isCreateGroupFailed = false;
   errorMessage = '';
   private subscription: Subscription | undefined;
 
@@ -52,7 +52,6 @@ export class CreateGroupComponent {
     this.subscription = this.mainFuncService.createGroup(groupName!,subjectName!,className!).subscribe({
       next: data => {
         console.log(data);
-        this.isCreateGroupFailed = false;
         this.router.navigate(["main-part"]);
       },
       error: err => {

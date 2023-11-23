@@ -47,12 +47,8 @@ export class FileMarksComponent implements OnInit,OnDestroy{
   }
 
   closeErrorAlert() {
-    this.isRateFileFailed = false; //////////////////////////////////////
+    this.isRateFileFailed = false;
   }
-
-  // closeSuccessAlert() {
-  //   this.isRateFileComplete = false;
-  // }
 
   rateFile(fileName: string): void{
     const {mark} = this.form.value;
@@ -61,7 +57,6 @@ export class FileMarksComponent implements OnInit,OnDestroy{
       next: data => {
         console.log(data);
         this.fileWorks = data;
-        // this.isRateFileComplete = true;
         this.router.navigate(["work-rating",this.exerciseId])
       },
       error: err => {

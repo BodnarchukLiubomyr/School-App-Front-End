@@ -13,7 +13,9 @@ import {
   FileMarksComponent,
   FileSendingComponent,
   GetChatsComponent,
+  GetClassStudentsComponent,
   GetGroupComponent,
+  GetTeacherFileComponent,
   GroupChatComponent,
   MainPartComponent,
   SubjectViewComponent,
@@ -43,7 +45,9 @@ const routes: Routes = [
   { path: 'chat/:chatId', component: ChatComponent},
   { path: 'get-chats/:userId', component: GetChatsComponent},
   { path: 'get-group/:subjectId/:userId', component: GetGroupComponent},
-  { path: 'group-chat/:groupId', component: GroupChatComponent}
+  { path: 'group-chat/:groupId', component: GroupChatComponent},
+  { path: 'teacher-file/:exerciseId',component: GetTeacherFileComponent},
+  { path: 'get-users-class/:className', component: GetClassStudentsComponent}
 ];
 
 @NgModule({

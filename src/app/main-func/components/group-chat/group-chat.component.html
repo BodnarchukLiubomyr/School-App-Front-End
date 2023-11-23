@@ -6,8 +6,10 @@
     </div>
   </div>
   <div class="message-input">
-    <!-- Use (input) instead of (change) for immediate updates -->
     <textarea [value]="newMessageContent || ''" (input)="onMessageInput($event)" placeholder="Type your message..."></textarea>
     <button (click)="sendMessage()">Send Message</button>
+    <button routerLink="/main-part" class="button-white">
+      <h3 class="link-text text-blue">Back</h3>
+    </button>
   </div>
 </div>

@@ -1,7 +1,7 @@
 .group-chat-container {
   display: flex;
   flex-direction: column;
-  width: 800px;
+  width: 600px;
   height: 100%;
   margin: 0 auto;
 }
@@ -13,7 +13,7 @@
 }
 
 .message {
-  background-color: #e0e0e0;
+  background-color: #E0FFFF;
   margin-bottom: 10px;
   padding: 8px;
   border-radius: 5px;
@@ -24,16 +24,6 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-}
-
-.my-message {
-  background-color: #4caf50;
-  color: white;
-}
-
-.other-message {
-  background-color: #e0e0e0;
-  color: black;
 }
 
 textarea {
@@ -49,6 +39,20 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+}
+
+.button-white {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 9px 24px;
+  gap: 10px;
+  border-color: #008ACE;
+  border-width: 2px;
+  background: #F0E68C;
+  border-radius: 3px;
+  margin-left: 10px;
 }
 
 button:hover {

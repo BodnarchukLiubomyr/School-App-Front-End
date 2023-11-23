@@ -11,11 +11,12 @@ import { MainFuncService } from '../../services/main-func.service';
   styleUrls: ['./get-group.component.scss']
 })
 export class GetGroupComponent implements OnInit,OnDestroy{
-  @Input() subjectId: string = '';
-  @Input() userId: string = '';
+  @Input() subjectId = '';
+  @Input() userId = '';
 
   groups: any;
   errorMessage = '';
+  isGetGroupFailed = false;
   private subscription: Subscription;
 
   constructor(
@@ -31,21 +32,31 @@ export class GetGroupComponent implements OnInit,OnDestroy{
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.subjectId = params['subjectId'];
-      this.userId = params['userId'];
+      this.userId = this.storageService.getUser().id;
       this.getGroup();
     });
+  }
+
+  claseErrorAlert(){
+    this.isGetGroupFailed = false;
+  }
+
+  isTeacher(): boolean {
+    const userRole = this.storageService.getUser().role;
+    console.log("Role:",userRole);
+    return userRole === 'TEACHER';
   }
 
   getGroup(): void{
     this.subscription = this.mainFuncService.getGroup(this.subjectId,this.userId)
     .subscribe({
       next: data => {
-        // console.log("Group",data);
         this.groups = data;
       },
       error: err => {
         if (err.status == 500) {
           this.errorMessage = err.error.message;
+          this.isGetGroupFailed = true;
         }
       }
     });

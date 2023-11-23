@@ -18,6 +18,7 @@ export class SubjectsComponent implements OnInit, OnDestroy{
 
   subjects: any;
   errorMessage = '';
+  isSubjectFailed = false;
   private subscription: Subscription;
 
   constructor(
@@ -37,6 +38,10 @@ export class SubjectsComponent implements OnInit, OnDestroy{
     }
   }
 
+  closeErrorAlert(){
+    this.isSubjectFailed = false;
+  }
+
   getSubjects(userId: string,token: string): void {
     this.subscription = this.mainFuncService.getSubjects(userId,token)
     .subscribe({
@@ -47,6 +52,7 @@ export class SubjectsComponent implements OnInit, OnDestroy{
       error: err => {
         if (err.status == 500) {
           this.errorMessage = err.error.message;
+          this.isSubjectFailed = true;
         }
       }
     });

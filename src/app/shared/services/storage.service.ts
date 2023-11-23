@@ -4,6 +4,7 @@ const USER_KEY = 'auth-user';
 const SUBJECTS_KEY = 'user-subjects';
 const EXERCISE_KEY = "exercise";
 const FILE_KEY = 'file'
+const CLASS_NAME_KEY = 'className';
 
 @Injectable({
   providedIn: 'root'
@@ -79,5 +80,14 @@ export class StorageService {
     }
 
     return {};
+  }
+
+  public saveClassName(className: any): void {
+    window.localStorage.removeItem(CLASS_NAME_KEY);
+    window.localStorage.setItem(CLASS_NAME_KEY, JSON.stringify(className));
+  }
+
+  public getClassName(): any {
+    return window.localStorage.getItem(CLASS_NAME_KEY);
   }
 }

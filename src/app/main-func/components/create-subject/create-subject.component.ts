@@ -35,7 +35,7 @@ export class CreateSubjectComponent {
   }
   );
 
-  isCreateSubjectFailed = true;
+  isCreateSubjectFailed = false;
   errorMessage = '';
   private subscription: Subscription | undefined;
 
@@ -55,7 +55,6 @@ export class CreateSubjectComponent {
     this.subscription = this.mainFuncService.createSubject(subjectName!,email!,className!).subscribe({
       next: data => {
         console.log(data);
-        this.isCreateSubjectFailed = false;
         this.router.navigate(["main-part"]);
       },
       error: err => {

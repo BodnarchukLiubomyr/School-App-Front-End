@@ -25,7 +25,7 @@ export class CreateClassComponent implements OnDestroy{
     }],
   });
 
-  isCreateClassFailed = true;
+  isCreateClassFailed = false;
   errorMessage = '';
   private subscription: Subscription | undefined
 
@@ -45,7 +45,6 @@ export class CreateClassComponent implements OnDestroy{
     this.subscription = this.mainFuncService.createClass(classNumber!,classLetter!).subscribe({
       next: data => {
         console.log(data);
-        this.isCreateClassFailed = false;
         this.router.navigate(["work-with-class"]);
       },
       error: err => {

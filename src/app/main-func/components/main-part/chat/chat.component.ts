@@ -1,5 +1,4 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from 'src/app/main-func/services/main-func.service';
@@ -18,7 +17,7 @@ export class ChatComponent implements OnInit,OnDestroy{
   errorMessage = '';
   userId = '';
   message: string | undefined;
-  isCreateChatFailed = true;
+  isCreateChatFailed = false;
 
   private subscription: Subscription;
 
@@ -38,43 +37,57 @@ export class ChatComponent implements OnInit,OnDestroy{
     })
   }
 
-  // getMessageClass(userName: string): string {
-  //   return userName === this.userName ? 'my-message' : 'other-message';
-  // }
-
   onMessageInput(event: Event): void {
     const target = event.target as HTMLTextAreaElement;
     this.newMessageContent = target.value || '';
   }
 
   loadChatHistory() {
-    // Call your chat service to get chat history based on the chatId
-    this.subscription = this.mainFuncService.getChatHistory(this.chatId)
-    .subscribe({
-      next: (data: { user: { firstname: string, lastname: string }, content: string }[]) => {
-        console.log('Received data:', data);
-        this.chatHistory = data.map((message) => ({
-          userName: (message.user && `${message.user.firstname} ${message.user.lastname}`) || 'Unknown User',
-          message: message.content
-        }));
 
-        // this.userName = this.storageService.getUser().lastname + this.storageService.getUser().firstname;
-      },
-      error: err => {
-        if (err.status == 500) {
-          this.errorMessage = err.error.message;
+    this.fetchChatHistory();
+    setInterval(() => {
+      this.fetchChatHistory();
+    }, 2000);
+  }
+
+  fetchChatHistory() {
+    this.subscription = this.mainFuncService.getChatHistory(this.chatId)
+      .subscribe({
+        next: (data: { user: { firstname: string, lastname: string }, content: string }[]) => {
+          console.log('Received data:', data);
+          const newMessages = data.map((message) => ({
+            userName: (message.user && `${message.user.firstname} ${message.user.lastname}`) || 'Unknown User',
+            message: message.content
+          }));
+
+          if (newMessages.length > this.chatHistory.length) {
+            this.chatHistory = newMessages;
+          }
+        },
+        error: err => {
+          if (err.status == 500) {
+            this.errorMessage = err.error.message;
+          }
         }
-      }
-    });
+      });
   }
 
   sendMessage() {
-    this.subscription = this.mainFuncService.sendMessage(this.chatId, this.userId, this.newMessageContent)
+
+    const messageContent = this.newMessageContent;
+    this.newMessageContent = '';
+
+    this.subscription = this.mainFuncService.sendMessage(this.chatId, this.userId, messageContent)
     .subscribe({
         next: data => {
+          const newMessage = {
+            userName: (data.user && `${data.user.firstname} ${data.user.lastname}`) || 'Unknown User',
+            message: data.content
+          };
+          console.log(newMessage)
           console.log('Message sent:', data);
-          this.chatHistory.push(data);
-          this.newMessageContent = '';
+
+          this.chatHistory.unshift(newMessage);
         },
         error: err => {
           if (err.status == 500) {
@@ -85,10 +98,13 @@ export class ChatComponent implements OnInit,OnDestroy{
     );
   }
 
-  getMessageClass(userName: string): string {
-    return userName === this.storageService.getUser().firstname + this.storageService.getUser().lastname
-      ? 'my-message'
-      : 'other-message';
+  calculateMessageHeight(message: string): string {
+    const lineHeight = 20;
+    const lines = message.split('\n').length;
+    const minHeight = 40;
+
+    const calculatedHeight = Math.max(lines * lineHeight, minHeight);
+    return `${calculatedHeight}px`;
   }
 
   ngOnDestroy(): void {

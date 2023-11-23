@@ -6,19 +6,24 @@ import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
 
 @Component({
-  selector: 'app-work-rating',
-  templateUrl: './work-rating.component.html',
-  styleUrls: ['./work-rating.component.scss']
+  selector: 'app-get-teacher-file',
+  templateUrl: './get-teacher-file.component.html',
+  styleUrls: ['./get-teacher-file.component.scss']
 })
-export class WorkRatingComponent implements OnInit,OnDestroy{
-
+export class GetTeacherFileComponent implements OnInit,OnDestroy{
   @Input() tasks: any[] = [];
-  exerciseId: string | undefined;
   fileName: string | undefined;
+
+  @Input()
+  exerciseId: string = ''
+
+  // @Input() tasks: any[] = [];
+  // exerciseId: string | undefined;
+  // fileName: string | undefined;
 
   fileWorks: any;
   errorMessage = '';
-  isWorkRatingFailed = false;
+  isGetTeacherFileFailed = false;
   private subscription: Subscription;
 
   constructor(
@@ -31,35 +36,34 @@ export class WorkRatingComponent implements OnInit,OnDestroy{
     this.subscription = new Subscription();
   }
 
+  closeErrorAlert(){
+    this.isGetTeacherFileFailed = false;
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
-      this.exerciseId = params['exerciseId'];
       this.fileName = params['fileName'];
-      if (this.exerciseId) {
-        this.getFileWork(this.exerciseId);
-      }
+      console.log(this.exerciseId);
       if (this.fileName) {
         this.downloadFile(this.fileName);
       }
     });
+    this.getTeacherFileWorks();
   }
 
-  closeErrorAlert(){
-    this.isWorkRatingFailed = false;
-  }
+  // this.exerciseId = params['exerciseId'];
 
-  getFileWork(exerciseId: string): void{
-    this.subscription = this.mainFuncService.getFileWork(exerciseId)
+  getTeacherFileWorks(): void{
+    this.subscription = this.mainFuncService.getTeacherFileWork(this.exerciseId)
     .subscribe({
       next: data => {
         console.log(data);
         this.fileWorks = data;
-        this.isWorkRatingFailed = false;
       },
       error: err => {
         if (err.status == 500) {
           this.errorMessage = err.error.message;
-          this.isWorkRatingFailed = true;
+          this.isGetTeacherFileFailed = true
         }
       }
     });
