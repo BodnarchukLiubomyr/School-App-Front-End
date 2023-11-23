@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 export class GroupChatComponent implements OnInit, OnDestroy{
   @Input() tasks: any[] = [];
   groupId = '';
-  chatHistory: { userName: string, message: string }[] = []; // Change the type accordingly
+  chatHistory: { userName: string, message: string }[] = [];
   userId = '';
   newMessageContent: any = '';
   message: string | undefined;
@@ -20,7 +20,8 @@ export class GroupChatComponent implements OnInit, OnDestroy{
 
   private subscription: Subscription;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private mainFuncService: MainFuncService,
     private storageService: StorageService)
     {
@@ -40,33 +41,51 @@ export class GroupChatComponent implements OnInit, OnDestroy{
     this.newMessageContent = target.value || '';
   }
 
-  getChatHistory(): void {
-    this.subscription = this.mainFuncService.getGroupChatHistory(this.groupId)
-    .subscribe({
-      next: (data: { user: { firstname: string, lastname: string }, content: string }[]) => {
-        console.log('Received data:', data);
-        this.chatHistory = data.map((message) => ({
-          userName: (message.user && `${message.user.firstname} ${message.user.lastname}`) || 'Unknown User',
-          message: message.content
-        }));
+  loadChatHistory() {
 
-        // this.userName = this.storageService.getUser().lastname + this.storageService.getUser().firstname;
-      },
-      error: err => {
-        if (err.status == 500) {
-          this.errorMessage = err.error.message;
-        }
-      }
-    });
+    this.getChatHistory();
+    setInterval(() => {
+      this.getChatHistory();
+    }, 2000);
   }
 
-  sendMessage(): void {
-    this.subscription = this.mainFuncService.sendGroupMessage(this.groupId, this.userId, this.newMessageContent)
+  getChatHistory(): void {
+    this.subscription = this.mainFuncService.getGroupChatHistory(this.groupId)
+      .subscribe({
+        next: (data: { content: string, sender: string, timestamp: string }[]) => {
+          console.log('Received data:', data);
+          const newMessages = data.map((message) => ({
+            userName: message.sender || 'Unknown User',
+            message: message.content
+          }));
+
+          if (newMessages.length > this.chatHistory.length) {
+            this.chatHistory = newMessages;
+          }
+        },
+        error: err => {
+          if (err.status == 500) {
+            this.errorMessage = err.error.message;
+          }
+        }
+      });
+  }
+
+  sendMessage() {
+    const messageContent = this.newMessageContent;
+    this.newMessageContent = '';
+
+    this.subscription = this.mainFuncService.sendGroupMessage(this.groupId, this.userId, messageContent)
     .subscribe({
-        next: data => {
+      next: data => {
+          const newMessage = {
+           userName: (data.user && `${data.user.firstname} ${data.user.lastname}`) || 'Unknown User',
+           message: data.content
+          };
+          console.log(newMessage)
           console.log('Message sent:', data);
-          this.chatHistory.push(data);
-          this.newMessageContent = '';
+
+          this.chatHistory.unshift(newMessage);
         },
         error: err => {
           if (err.status == 500) {

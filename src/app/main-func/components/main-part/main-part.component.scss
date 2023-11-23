@@ -3,6 +3,20 @@
   width: 100%;
 }
 
+.center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; /* Set the container to full viewport height */
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 20px; /* Adjust the margin between columns as needed */
+}
+
 .button {
   display: inline-block;
   padding: 10px 20px;

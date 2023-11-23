@@ -12,17 +12,16 @@ import { StorageService } from 'src/app/shared';
 export class GetChatsComponent implements OnInit,OnDestroy{
 
   @Input()
-  userId = ''; // Set the user ID here
+  userId = '';
   userChats: any[] = [];
 
   errorMessage = '';
+  isGetChatsFailed = true;
   private subscription: Subscription;
 
   constructor(
     private mainFuncService: MainFuncService,
     private storageService: StorageService,
-    private router: Router,
-    private route: ActivatedRoute,
   ) {
     this.subscription = new Subscription();
   }
@@ -32,16 +31,22 @@ export class GetChatsComponent implements OnInit,OnDestroy{
     this.loadChats();
   }
 
+  closeErrorAlert(){
+    this.isGetChatsFailed = false;
+  }
+
   loadChats(): void {
     this.subscription = this.mainFuncService.getAllUserChats(this.userId)
     .subscribe({
       next: data => {
         console.log(data);
         this.userChats = data;
+        this.isGetChatsFailed = false;
       },
       error: err => {
         if (err.status == 500) {
           this.errorMessage = err.error.message;
+          this.isGetChatsFailed=true;
         }
       }
       }

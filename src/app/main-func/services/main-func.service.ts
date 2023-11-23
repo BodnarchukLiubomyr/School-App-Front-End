@@ -44,6 +44,13 @@ export class MainFuncService {
     );
   }
 
+  getClassUsers(className: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-class-users/'+ className,
+      {responseType: 'json'}
+    );
+  }
+
   deleteUser(email: string, token: string): Observable<any>{
     return this.http.delete(
       this.backendApi + '/api/v1/school-app/delete-user/' + email,
@@ -160,6 +167,13 @@ export class MainFuncService {
   getFileWork(exerciseId: string):Observable<any>{
     return this.http.get(
       this.backendApi + '/api/v1/school-app/get-works/'+ exerciseId,
+      {responseType: "json"}
+    )
+  }
+
+  getTeacherFileWork(exerciseId: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-teacher-works/'+ exerciseId,
       {responseType: "json"}
     )
   }

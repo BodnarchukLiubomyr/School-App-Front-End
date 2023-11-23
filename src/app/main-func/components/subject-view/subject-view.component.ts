@@ -19,6 +19,7 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
 
   exercises: any;
   errorMessage = '';
+  issubjectViewFailed = false;
   private subscription: Subscription;
 
   constructor(
@@ -43,17 +44,22 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
     });
   }
 
+  closeErrorAlert(){
+    this.issubjectViewFailed = false;
+  }
+
   getExercises(subjectId: string): void {
     this.subscription = this.mainFuncService.getExercises(subjectId)
     .subscribe({
       next: data => {
         console.log(data);
         this.exercises = data;
-        this.storageService.saveExercise(data);/////////////////////
+        this.storageService.saveExercise(data);
       },
       error: err => {
         if (err.status == 500) {
           this.errorMessage = err.error.message;
+          this.issubjectViewFailed = true;
         }
       }
     });

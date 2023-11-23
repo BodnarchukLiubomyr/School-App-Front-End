@@ -52,7 +52,7 @@ export class AddUserToGroupComponent implements OnDestroy{
   }
 
   closeErrorAlert() {
-    this.isAddUserToGroupFailed = false; /////////////////////////////////////////////////
+    this.isAddUserToGroupFailed = false;
   }
 
   onSubmit(): void {
@@ -61,7 +61,6 @@ export class AddUserToGroupComponent implements OnDestroy{
 
     this.subscription = this.mainFuncService.addUserToGroup(groupName!,email!,className!).subscribe({
       next: data => {
-        this.isAddUserToGroupFailed = false;
         this.router.navigate(['main-part']);
       },
       error: err => {

@@ -71,7 +71,8 @@
       </div>
 
       <div class="button-container">
-        <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
+        <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid" *ngFor="let schoolClass of schoolClasses"
+        [routerLink]="['/get-users-class', schoolClass.name]">
           <h3 class="link-text text-white">Add user</h3>
         </button>
 

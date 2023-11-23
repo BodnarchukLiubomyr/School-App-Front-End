@@ -37,7 +37,7 @@ export class CreateChatComponent {
   // createdChatId = '';
   errorMessage = '';
   userId = '';
-  isCreateChatFailed = true;
+  isCreateChatFailed = false;
 
   private subscription: Subscription;
 
@@ -64,8 +64,6 @@ export class CreateChatComponent {
     this.subscription = this.mainFuncService.createChat(this.userId, lastname!,firstname!).subscribe({
       next: data => {
         console.log(data);
-        this.isCreateChatFailed = false;
-        // this.createdChatId = data.id;
         this.router.navigate(["main-part"])
       },
       error: err => {

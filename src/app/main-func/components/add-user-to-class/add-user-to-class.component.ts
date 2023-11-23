@@ -32,17 +32,18 @@ export class AddUserToClassComponent implements OnDestroy{
 
   private subscription: Subscription;
 
-  isLoggedIn = false;
   isAddUserToClassFailed = false;
   errorMessage = '';
   roles: string[] = [];
-
+  schoolClasses: any;
+  className: string | undefined;
   showPassword = false;
 
   constructor(
     private mainFuncService: MainFuncService,
     private router: Router,
     private fb: FormBuilder,
+    private storageService: StorageService,
   ) {
     this.subscription = new Subscription();
   }
@@ -57,9 +58,8 @@ export class AddUserToClassComponent implements OnDestroy{
 
     this.subscription = this.mainFuncService.addUserToClass(email!,className!).subscribe({
       next: data => {
-        this.isAddUserToClassFailed = false;
-
-        this.router.navigate(['work-with-class']);
+        console.log(data);
+        this.schoolClasses = data;
       },
       error: err => {
         if (err.status == 500) {

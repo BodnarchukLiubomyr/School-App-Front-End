@@ -22,7 +22,9 @@ import {
   CreateChatComponent,
   ChatComponent,
   GetChatsComponent,
-  GroupChatComponent
+  GroupChatComponent,
+  GetTeacherFileComponent,
+  GetClassStudentsComponent
 } from './index'
 
 
@@ -46,7 +48,9 @@ import {
     CreateChatComponent,
     ChatComponent,
     GetChatsComponent,
-    GroupChatComponent
+    GroupChatComponent,
+    GetTeacherFileComponent,
+    GetClassStudentsComponent
   ],
   imports: [
     CommonModule,

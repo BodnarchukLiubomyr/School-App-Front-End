@@ -1,32 +1,28 @@
-<!-- <div *ngIf="fileWorks && fileWorks.length > 0; else noFileWorks">
-  <h2>File Works</h2>
-  <ul>
-    <li *ngFor="let fileWork of fileWorks">
-      <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
-      <button [routerLink]="['/file-marks', fileWork.fileName]">Rate file</button>
-    </li>
-  </ul>
-</div> -->
 <div *ngIf="fileWorks && fileWorks.length > 0; else noFileWorks">
-  <h2>File Works</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>File Name</th>
-        <th>Rate</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let fileWork of fileWorks">
-        <td>
-          <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
-        </td>
-        <td>
-          <button [routerLink]="['/file-marks', fileWork.fileName]">Rate file</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <button routerLink="/main-part" class="button-back">
+    <h3 class="link-text text-blue">Back</h3>
+  </button>
+  <h2 class="h2">File Works</h2>
+  <div class="excel-container">
+    <table class="excel-table">
+      <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fileWork of fileWorks">
+          <td>
+            <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
+          </td>
+          <td>
+            <button [routerLink]="['/file-marks', fileWork.fileName]" class="button">Rate file</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
 <ng-template #noFileWorks>

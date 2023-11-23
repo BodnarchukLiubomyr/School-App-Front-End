@@ -6,7 +6,7 @@
   flex-shrink: 0;
 
   border-radius: 0px 0px 6px 6px;
-  background: var(--grayscale-grey-80, #303240);
+  background: var(--grayscale-grey-80, #A52A2A);
   box-shadow: 0px 3px 10px 0px rgba(44, 47, 60, 0.12), 0px 1px 2px 0px rgba(44, 47, 60, 0.06);
 }
 
@@ -62,6 +62,7 @@
 }
 
 .content {
+  color: var(--grayscale-white, #FFF);
   display: flex;
   height: 52px;
   padding: 16px 16px 16px 48px;
@@ -70,7 +71,18 @@
   flex: 1 0 0;
 }
 
+.teacher-links a {
+  font-size: 18px; /* Adjust the font size as needed */
+  margin-right: 40px; /* Adjust the right margin as needed */
+}
+
+.user-links a {
+  font-size: 18px; /* Adjust the font size as needed */
+  margin-right: 40px; /* Adjust the right margin as needed */
+}
+
 .menu {
+  color: var(--grayscale-white, #FFF);
   display: flex;
   height: 24px;
   align-items: flex-start;
@@ -83,6 +95,14 @@
   flex-direction: column;
   align-items: flex-end;
   gap: 32px;
+}
+
+.dropdown-items-container {
+  display: flex;
+  width: 180px;
+  justify-content: flex-end;
+  align-items: flex-start;
+  gap: 8px;
 }
 
 .dropdown-menu {
@@ -117,14 +137,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 24px;
-}
-
-.dropdown-items-container {
-  display: flex;
-  width: 180px;
-  justify-content: flex-end;
-  align-items: flex-start;
-  gap: 8px;
 }
 
 .account-icons-container {

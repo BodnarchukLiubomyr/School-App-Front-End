@@ -5,6 +5,8 @@
     <p>Description: {{ exercise.description }}</p>
     <p>Date: {{ exercise.date }}</p>
     <button [routerLink]="['/work-rating', exercise.id]" *ngIf="isTeacher()">Check students' works</button>
+    <p>Education material</p>
+    <app-get-teacher-file [exerciseId]="exercise.id"></app-get-teacher-file>
     <app-file-sending [exerciseId]="exercise.id"></app-file-sending>
   </div>
 </div>

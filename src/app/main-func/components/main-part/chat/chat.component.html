@@ -1,13 +1,15 @@
 <div class="chat-container">
   <div class="chat-history">
-    <div *ngFor="let message of chatHistory" class="message">
+    <div *ngFor="let message of chatHistory" class="message" [ngStyle]="{ 'min-height': calculateMessageHeight(message.message) }">
       <span class="user-name">{{ message.userName }}:</span>
       <span class="message-content">{{ message.message }}</span>
     </div>
   </div>
   <div class="message-input">
-    <!-- Use (input) instead of (change) for immediate updates -->
     <textarea [value]="newMessageContent || ''" (input)="onMessageInput($event)" placeholder="Type your message..."></textarea>
     <button (click)="sendMessage()">Send Message</button>
+    <button routerLink="/main-part" class="button-white">
+      <h3 class="link-text text-blue">Back</h3>
+    </button>
   </div>
 </div>
