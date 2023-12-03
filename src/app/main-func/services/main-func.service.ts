@@ -121,6 +121,20 @@ export class MainFuncService {
     )
   }
 
+  getGroups(subjectId: string, userId: string): Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-groups/'+subjectId+'/'+userId,
+      { responseType: 'json'}
+    )
+  }
+
+  deleteGroup(groupName:string):Observable<any>{
+    return this.http.delete(
+      this.backendApi + '/api/v1/school-app/delete-group/'+groupName,
+      {responseType:'json'}
+    )
+  }
+
   createExercise(name:string,description: string, date: string, className: string, subjectName: string): Observable<any>{
     return this.http.post(
       this.backendApi + '/api/v1/school-app/create-exercise',
@@ -139,6 +153,13 @@ export class MainFuncService {
     return this.http.get(
       this.backendApi + '/api/v1/school-app/get-exercises/'+subjectId,
       { responseType: 'json' }
+    )
+  }
+
+  deleteExerise(exerciseName:string):Observable<any>{
+    return this.http.delete(
+      this.backendApi + '/api/v1/school-app/delete-exercise/'+ exerciseName,
+      {responseType:'json'}
     )
   }
 
@@ -183,6 +204,13 @@ export class MainFuncService {
       this.backendApi + '/api/v1/school-app/rate-file/'+ fileName,
       {mark: +mark},
       httpOptions
+    )
+  }
+
+  getMark(userId: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-mark/'+ userId,
+      {responseType: "json"}
     )
   }
 

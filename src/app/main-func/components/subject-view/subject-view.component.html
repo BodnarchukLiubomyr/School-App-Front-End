@@ -1,12 +1,20 @@
+<app-navbar></app-navbar>
 <div *ngIf="exercises && exercises.length > 0; else noExercises">
   <div *ngFor="let exercise of exercises" class="exercise-card">
     <h2>Exercise Details</h2>
-    <p>Name of Exercise: {{ exercise.name }}</p>
-    <p>Description: {{ exercise.description }}</p>
-    <p>Date: {{ exercise.date }}</p>
-    <button [routerLink]="['/work-rating', exercise.id]" *ngIf="isTeacher()">Check students' works</button>
-    <p>Education material</p>
-    <app-get-teacher-file [exerciseId]="exercise.id"></app-get-teacher-file>
+    <div class="exercise-info">
+      <p>Name of Exercise: {{ exercise.name }}</p>
+      <p>Description: {{ exercise.description }}</p>
+      <p>Date: {{ exercise.date }}</p>
+      <p>Education material</p>
+      <app-get-teacher-file [exerciseId]="exercise.id"></app-get-teacher-file>
+    </div>
+    <app-get-mark></app-get-mark>
+    <div class="buttons">
+      <button class="button" [routerLink]="['/work-rating', exercise.id]" *ngIf="isTeacher()">Check students' works</button>
+      <span class="button-separator"></span>
+      <button class="button" (click)="onDelete(exercise.name)">Delete exercise</button>
+    </div>
     <app-file-sending [exerciseId]="exercise.id"></app-file-sending>
   </div>
 </div>

@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from '../../services/main-func.service';
 import { StorageService } from 'src/app/shared';
+import { DeleteExerciseComponent } from '../delete-exercise/delete-exercise.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-subject-view',
@@ -27,7 +29,8 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
     private storageService: StorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private dialog: MatDialog
   ) {
     this.subscription = new Subscription();
   }
@@ -57,6 +60,9 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
         this.storageService.saveExercise(data);
       },
       error: err => {
+        if (err.status === 400) {
+          this.showError('Bad Request: Please check your file.');
+        }
         if (err.status == 500) {
           this.errorMessage = err.error.message;
           this.issubjectViewFailed = true;
@@ -65,10 +71,22 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
     });
   }
 
+  onDelete(exerciseName: string): void {
+    this.dialog.open(DeleteExerciseComponent, {
+      data: {
+        exerciseName:exerciseName }
+    });
+  }
+
   isTeacher(): boolean {
     const userRole = this.storageService.getUser().role;
     console.log("Role:",userRole);
     return userRole === 'TEACHER';
+  }
+
+  showError(message: string): void {
+    console.error('Error:', message);
+    this.errorMessage = 'Error: ' + message;
   }
 
   ngOnDestroy(): void {

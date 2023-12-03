@@ -1,6 +1,4 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
 import {
   MatTooltipModule,
  } from '@angular/material/tooltip';
@@ -10,7 +8,8 @@ import {
  import { MatFormFieldModule } from "@angular/material/form-field";
  import { MatInputModule } from '@angular/material/input';
 
- const material = [
+
+const material = [
   MatTooltipModule,
   MatDialogModule,
   MatButtonModule,
@@ -19,8 +18,10 @@ import {
   MatInputModule,
 ];
 
+
 @NgModule({
   exports: [material],
   imports: [material]
+
 })
 export class MaterialModule { }

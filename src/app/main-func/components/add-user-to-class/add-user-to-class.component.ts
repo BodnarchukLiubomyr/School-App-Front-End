@@ -2,10 +2,10 @@ import { Component, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { AuthService } from 'src/app/auth';
 import { forbiddenDomain } from 'src/app/auth/directives/validation/forbidden-domain.directive';
 import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-user-to-class',
@@ -44,6 +44,7 @@ export class AddUserToClassComponent implements OnDestroy{
     private router: Router,
     private fb: FormBuilder,
     private storageService: StorageService,
+    private location: Location
   ) {
     this.subscription = new Subscription();
   }
@@ -60,6 +61,7 @@ export class AddUserToClassComponent implements OnDestroy{
       next: data => {
         console.log(data);
         this.schoolClasses = data;
+        this.router.navigate(['get-users-class', className]);
       },
       error: err => {
         if (err.status == 500) {
@@ -68,6 +70,11 @@ export class AddUserToClassComponent implements OnDestroy{
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

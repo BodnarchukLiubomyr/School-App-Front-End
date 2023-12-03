@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { forbiddenDomain } from 'src/app/auth/directives/validation/forbidden-domain.directive';
 import { MainFuncService } from '../../services/main-func.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-add-user-to-group',
@@ -47,6 +48,7 @@ export class AddUserToGroupComponent implements OnDestroy{
     private mainFuncService: MainFuncService,
     private router: Router,
     private fb: FormBuilder,
+    private location: Location
   ) {
     this.subscription = new Subscription();
   }
@@ -70,6 +72,11 @@ export class AddUserToGroupComponent implements OnDestroy{
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

@@ -20,7 +20,7 @@ export class GetClassStudentsComponent implements OnInit,OnDestroy{
   isGetClassUsersFailed = false;
   errorMessage = '';
 
-  schoolClasses: any;
+  schoolClass: any;
 
   constructor(
     private mainFuncService: MainFuncService,
@@ -49,7 +49,8 @@ export class GetClassStudentsComponent implements OnInit,OnDestroy{
     this.subscription = this.mainFuncService.getClassUsers(className)
     .subscribe({
       next: data => {
-        this.schoolClasses = data;
+        this.schoolClass = data;
+        console.log('School Class:', this.schoolClass);
         this.className = this.storageService.getClassName();
       },
       error: err => {

@@ -1,9 +1,10 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { Component, Input,OnDestroy, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
+import { DeleteGroupComponent } from '../delete-group/delete-group.component';
 
 @Component({
   selector: 'app-get-group',
@@ -11,8 +12,10 @@ import { MainFuncService } from '../../services/main-func.service';
   styleUrls: ['./get-group.component.scss']
 })
 export class GetGroupComponent implements OnInit,OnDestroy{
-  @Input() subjectId = '';
-  @Input() userId = '';
+  @Input()
+  subjectId = '';
+  @Input()
+  userId = '';
 
   groups: any;
   errorMessage = '';
@@ -24,7 +27,7 @@ export class GetGroupComponent implements OnInit,OnDestroy{
     private storageService: StorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private dialog: MatDialog
   ) {
     this.subscription = new Subscription();
   }
@@ -48,9 +51,10 @@ export class GetGroupComponent implements OnInit,OnDestroy{
   }
 
   getGroup(): void{
-    this.subscription = this.mainFuncService.getGroup(this.subjectId,this.userId)
+    this.subscription = this.mainFuncService.getGroups(this.subjectId,this.userId)
     .subscribe({
       next: data => {
+        console.log(data);
         this.groups = data;
       },
       error: err => {
@@ -61,6 +65,21 @@ export class GetGroupComponent implements OnInit,OnDestroy{
       }
     });
   }
+
+  onDelete(groupName: string): void {
+    const dialogRef = this.dialog.open(DeleteGroupComponent, {
+      data: {
+        groupName: groupName},
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.getGroup();
+      }
+    });
+    // [routerLink]="['/delete-group', group.groupName]"
+  }
+
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

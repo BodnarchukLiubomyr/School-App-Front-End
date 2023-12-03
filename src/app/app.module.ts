@@ -12,6 +12,8 @@ import { DeleteUserComponent } from './main-func/components/delete-user/delete-u
 import { MainFuncModule } from './main-func/main-func.module';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MaterialModule } from './material.module';
 
 
 const appInitializerFn = (appConfig: ConfigService) => {
@@ -33,7 +35,8 @@ const appInitializerFn = (appConfig: ConfigService) => {
     MainFuncModule,
     HttpClientModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MaterialModule
   ],
   providers: [
     ConfigService,
@@ -42,7 +45,12 @@ const appInitializerFn = (appConfig: ConfigService) => {
       useFactory: appInitializerFn,
       multi: true,
       deps: [ConfigService]
-    }
+    },
+    {
+      provide: MatDialogRef,
+      useValue: {}
+    },
+    { provide: MAT_DIALOG_DATA, useValue: {} }
   ],
   bootstrap: [AppComponent]
 })
