@@ -24,8 +24,12 @@ import {
   GetChatsComponent,
   GroupChatComponent,
   GetTeacherFileComponent,
-  GetClassStudentsComponent
+  GetClassStudentsComponent,
+  DeleteGroupComponent,
+  DeleteExerciseComponent,
+  GetMarkComponent
 } from './index'
+import { MaterialModule } from '../material.module';
 
 
 @NgModule({
@@ -50,12 +54,16 @@ import {
     GetChatsComponent,
     GroupChatComponent,
     GetTeacherFileComponent,
-    GetClassStudentsComponent
+    GetClassStudentsComponent,
+    DeleteGroupComponent,
+    DeleteExerciseComponent,
+    GetMarkComponent
   ],
   imports: [
     CommonModule,
     ReactiveFormsModule,
+    MaterialModule,
     MainFuncRoutingModule
-  ]
+  ],
 })
 export class MainFuncModule { }

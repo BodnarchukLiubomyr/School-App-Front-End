@@ -10,11 +10,14 @@ import {
   CreateExerciseComponent,
   CreateGroupComponent,
   CreateSubjectComponent,
+  DeleteExerciseComponent,
+  DeleteGroupComponent,
   FileMarksComponent,
   FileSendingComponent,
   GetChatsComponent,
   GetClassStudentsComponent,
   GetGroupComponent,
+  GetMarkComponent,
   GetTeacherFileComponent,
   GroupChatComponent,
   MainPartComponent,
@@ -47,7 +50,10 @@ const routes: Routes = [
   { path: 'get-group/:subjectId/:userId', component: GetGroupComponent},
   { path: 'group-chat/:groupId', component: GroupChatComponent},
   { path: 'teacher-file/:exerciseId',component: GetTeacherFileComponent},
-  { path: 'get-users-class/:className', component: GetClassStudentsComponent}
+  { path: 'get-users-class/:className', component: GetClassStudentsComponent},
+  { path: 'delete-group/:groupName',component:DeleteGroupComponent},
+  { path: 'delete-exercise/:exerciseName',component:DeleteExerciseComponent},
+  { path: 'get-mark/:userId',component: GetMarkComponent}
 ];
 
 @NgModule({

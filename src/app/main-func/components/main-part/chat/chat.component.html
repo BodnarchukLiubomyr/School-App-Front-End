@@ -8,7 +8,7 @@
   <div class="message-input">
     <textarea [value]="newMessageContent || ''" (input)="onMessageInput($event)" placeholder="Type your message..."></textarea>
     <button (click)="sendMessage()">Send Message</button>
-    <button routerLink="/main-part" class="button-white">
+    <button (click)="goBack($event)" class="button-white">
       <h3 class="link-text text-blue">Back</h3>
     </button>
   </div>

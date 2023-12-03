@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from 'src/app/main-func/services/main-func.service';
 import { StorageService } from 'src/app/shared';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-chat',
@@ -24,7 +25,8 @@ export class ChatComponent implements OnInit,OnDestroy{
   constructor(
     private mainFuncService: MainFuncService,
     private storageService: StorageService,
-    private route: ActivatedRoute)
+    private route: ActivatedRoute,
+    private location:Location)
     {
       this.subscription = new Subscription();
     }
@@ -105,6 +107,11 @@ export class ChatComponent implements OnInit,OnDestroy{
 
     const calculatedHeight = Math.max(lines * lineHeight, minHeight);
     return `${calculatedHeight}px`;
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

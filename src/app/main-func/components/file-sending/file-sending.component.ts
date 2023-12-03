@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { MainFuncService } from '../../services/main-func.service';
 import { StorageService } from 'src/app/shared';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-file-sending',
@@ -27,6 +28,7 @@ export class FileSendingComponent implements OnInit,OnDestroy{
       private storageService: StorageService,
       private router: Router,
       private route: ActivatedRoute,
+      private location:Location
     ) {
       this.subscription = new Subscription();
     }
@@ -79,13 +81,9 @@ export class FileSendingComponent implements OnInit,OnDestroy{
             next: data => {
               if (data.status === 'success') {
                 console.log('The project has been successfully uploaded.');
-                // Handle success
                 this.UploadFileEvent.emit(data.file);
-              } else {
-                // Handle other statuses or errors
-                this.showError(data.message);
+                this.goBack();
               }
-              // Navigate to the desired route after successful upload
             },
             error: err => {
               console.error('Error occurred during file upload:', err);
@@ -95,10 +93,6 @@ export class FileSendingComponent implements OnInit,OnDestroy{
       }
     }
 
-    ngOnDestroy(): void {
-      this.subscription.unsubscribe();
-    }
-
     private isFileTypeAllowed(file: File): boolean {
       const allowedTypes = ['.pdf', '.doc', '.docx', '.ppt', '.pptx'];
       const fileType = `.${file.name.split('.').pop()}`;
@@ -106,7 +100,21 @@ export class FileSendingComponent implements OnInit,OnDestroy{
     }
 
     private showError(message: string): void {
-      console.error('Error:', message);
-      this.errorMessage = 'Error:'+message;
+      // console.error('Error:', message);
+      this.errorMessage = 'Error:' + message;
+      if (this.errorMessage) {
+        this.errorMessage = 'Error:' + message;
+      }
+    }
+
+    goBack(event?: MouseEvent) {
+      if (event) {
+        event.preventDefault();
+      }
+      this.location.back();
+    }
+
+    ngOnDestroy(): void {
+      this.subscription.unsubscribe();
     }
 }

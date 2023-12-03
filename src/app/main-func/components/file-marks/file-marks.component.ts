@@ -15,18 +15,17 @@ export class FileMarksComponent implements OnInit,OnDestroy{
     mark: ['',{
       validators: [
         Validators.required,
-        Validators.pattern(/^(0?[1-9]|1[0-1])$/)
+        Validators.pattern(/^(0|[1-9]|1[0-2])$/)
       ]
   }]});
 
   @Input()tasks: any[] = [];
   fileName = '';
 
-  fileWorks: any;
+  fileWork: any;
   errorMessage = '';
   private subscription: Subscription;
   exerciseId = '';
-  // isRateFileComplete= false;
   isRateFileFailed = false;
 
   constructor(
@@ -52,11 +51,14 @@ export class FileMarksComponent implements OnInit,OnDestroy{
 
   rateFile(fileName: string): void{
     const {mark} = this.form.value;
+    if (this.fileWork) {
+      this.fileWork.mark = mark;
+
     this.subscription = this.mainFuncService.fileMarks(fileName,mark!)
     .subscribe({
       next: data => {
         console.log(data);
-        this.fileWorks = data;
+        this.fileWork = data;
         this.router.navigate(["work-rating",this.exerciseId])
       },
       error: err => {
@@ -66,6 +68,9 @@ export class FileMarksComponent implements OnInit,OnDestroy{
         }
       }
     });
+    } else {
+      console.error("FileWork is not defined.");
+    }
   }
 
   ngOnDestroy(): void {
