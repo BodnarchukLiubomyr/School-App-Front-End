@@ -46,10 +46,6 @@
             <div *ngIf="forgotForm.controls['email'].errors?.['pattern']" class="label text-red">
               Email is not valid.
             </div>
-
-            <div *ngIf="forgotForm.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
-              Unfortunately, "epam.com" domain-based email address cannot be used.
-            </div>
           </div>
         </div>
       </div>

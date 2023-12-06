@@ -21,6 +21,7 @@ export class FileSendingComponent implements OnInit,OnDestroy{
     fileName = '';
     errorMessage: string = '';
     processing = false;
+    isFileUploaded = false;
     private subscription: Subscription;
 
     constructor(
@@ -36,6 +37,10 @@ export class FileSendingComponent implements OnInit,OnDestroy{
     ngOnInit(): void {
       this.userId = this.storageService.getUser().id;
       this.token = this.storageService.getUser().token;
+    }
+
+    closeSuccessAlert() {
+      this.isFileUploaded = false;
     }
 
     onDragOver(event: any) {
@@ -82,6 +87,7 @@ export class FileSendingComponent implements OnInit,OnDestroy{
               if (data.status === 'success') {
                 console.log('The project has been successfully uploaded.');
                 this.UploadFileEvent.emit(data.file);
+                this.isFileUploaded = true;
                 this.goBack();
               }
             },
@@ -100,7 +106,6 @@ export class FileSendingComponent implements OnInit,OnDestroy{
     }
 
     private showError(message: string): void {
-      // console.error('Error:', message);
       this.errorMessage = 'Error:' + message;
       if (this.errorMessage) {
         this.errorMessage = 'Error:' + message;

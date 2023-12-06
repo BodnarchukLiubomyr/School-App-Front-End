@@ -14,7 +14,9 @@ import {
   DeleteGroupComponent,
   FileMarksComponent,
   FileSendingComponent,
+  FindClassComponent,
   GetChatsComponent,
+  GetClassComponent,
   GetClassStudentsComponent,
   GetGroupComponent,
   GetMarkComponent,
@@ -31,7 +33,7 @@ import { SubjectsComponent } from './components/main-part/subjects/subjects.comp
 
 const routes: Routes = [
   { path: 'main-part', component: MainPartComponent },
-  { path: 'delete-user', component: DeleteUserComponent},
+  { path: 'delete-user/:lastname/:firstname', component: DeleteUserComponent},
   { path: 'create-exercise', component: CreateExerciseComponent},
   { path: 'create-subject',component: CreateSubjectComponent},
   { path: 'get-subjects', component: SubjectsComponent},
@@ -53,7 +55,9 @@ const routes: Routes = [
   { path: 'get-users-class/:className', component: GetClassStudentsComponent},
   { path: 'delete-group/:groupName',component:DeleteGroupComponent},
   { path: 'delete-exercise/:exerciseName',component:DeleteExerciseComponent},
-  { path: 'get-mark/:userId',component: GetMarkComponent}
+  { path: 'get-mark/:userId/:exerciseId',component: GetMarkComponent},
+  { path: 'find-class',component: FindClassComponent},
+  { path: 'get-class/:className',component: GetClassComponent}
 ];
 
 @NgModule({

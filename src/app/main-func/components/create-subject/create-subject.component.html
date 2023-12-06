@@ -54,9 +54,6 @@
             <div *ngIf="form.controls['email'].errors?.['pattern']" class="label text-red">
               Email is not valid.
             </div>
-            <div *ngIf="form.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
-              Unfortunately, "epam.com" domain-based email address cannot be used.
-            </div>
           </div>
         </div>
         <div class="field-container">
@@ -81,6 +78,9 @@
         <div class="button-container">
           <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
             <h3 class="link-text text-white">Create</h3>
+          </button>
+          <button class="button-white" (click)="goBack($event)">
+            <h3 class="link-text text-blue">Back</h3>
           </button>
         </div>
       </div>

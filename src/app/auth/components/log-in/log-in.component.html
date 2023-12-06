@@ -39,9 +39,6 @@
             <div *ngIf="loginForm.controls['email'].errors?.['unavailable']" class="label text-red">
               Email not found in the database.
             </div>
-            <div *ngIf="loginForm.controls['email'].errors?.['forbiddenDomain']" class="label text-red">
-              Unfortunately, "epam.com" domain-based email address cannot be used.
-            </div>
           </div>
         </div>
 

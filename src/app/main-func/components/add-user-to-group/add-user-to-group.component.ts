@@ -2,7 +2,6 @@ import { Component, OnDestroy } from '@angular/core';
 import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { forbiddenDomain } from 'src/app/auth/directives/validation/forbidden-domain.directive';
 import { MainFuncService } from '../../services/main-func.service';
 import { Location } from '@angular/common';
 
@@ -23,8 +22,7 @@ export class AddUserToGroupComponent implements OnDestroy{
     email: ['', {
       validators: [
         Validators.required,
-        Validators.pattern(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$/),
-        forbiddenDomain(/\w+@epam\.com$/i)
+        Validators.pattern(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$/)
       ]
     }],
     className: ['', {

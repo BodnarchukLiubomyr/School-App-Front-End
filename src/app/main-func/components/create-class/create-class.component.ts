@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MainFuncService } from '../../services/main-func.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-class',
@@ -32,7 +33,8 @@ export class CreateClassComponent implements OnDestroy{
   constructor(
     private mainFuncService: MainFuncService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   closeErrorAlert() {
@@ -45,7 +47,7 @@ export class CreateClassComponent implements OnDestroy{
     this.subscription = this.mainFuncService.createClass(classNumber!,classLetter!).subscribe({
       next: data => {
         console.log(data);
-        this.router.navigate(["work-with-class"]);
+        this.router.navigate(["main-part"]);
       },
       error: err => {
         if (err.status == 500) {
@@ -54,6 +56,11 @@ export class CreateClassComponent implements OnDestroy{
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

@@ -87,6 +87,10 @@ export class MainPartComponent implements OnInit{
     this.router.navigate(['add-user-to-class'])
   }
 
+  navigateToFindClass(){
+    this.router.navigate(['find-class'])
+  }
+
   navigateToCreateSubject(): void {
     this.router.navigate(['create-subject']);
   }

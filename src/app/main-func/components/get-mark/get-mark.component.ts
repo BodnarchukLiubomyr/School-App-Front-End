@@ -12,7 +12,10 @@ import { MainFuncService } from '../../services/main-func.service';
 })
 export class GetMarkComponent implements OnInit,OnDestroy{
   @Input()
-  userId: any;
+  exerciseId: string = '';
+
+  @Input()
+  userId = '';
 
   fileWork: any;
   errorMessage = '';
@@ -35,7 +38,7 @@ export class GetMarkComponent implements OnInit,OnDestroy{
   }
 
   getMark(): void{
-    this.subscription = this.mainFuncService.getMark(this.userId)
+    this.subscription = this.mainFuncService.getMark(this.userId,this.exerciseId)
     .subscribe({
       next: data => {
         console.log(data);

@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-file-marks',
@@ -33,7 +34,8 @@ export class FileMarksComponent implements OnInit,OnDestroy{
     private storageService: StorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) {
     this.subscription = new Subscription();
   }
@@ -58,6 +60,7 @@ export class FileMarksComponent implements OnInit,OnDestroy{
     .subscribe({
       next: data => {
         console.log(data);
+        console.log(this.exerciseId);
         this.fileWork = data;
         this.router.navigate(["work-rating",this.exerciseId])
       },
@@ -71,6 +74,11 @@ export class FileMarksComponent implements OnInit,OnDestroy{
     } else {
       console.error("FileWork is not defined.");
     }
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

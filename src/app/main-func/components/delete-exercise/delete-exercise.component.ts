@@ -26,7 +26,7 @@ export class DeleteExerciseComponent {
   }
 
   deleteExercise() : void{
-    this.mainFuncService.deleteExerise(this.exerciseName).subscribe({
+    this.mainFuncService.deleteExercise(this.exerciseName).subscribe({
       next: (data) => {
         console.log(data);
         window.location.reload();

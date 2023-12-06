@@ -4,6 +4,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-work-rating',
@@ -26,7 +27,8 @@ export class WorkRatingComponent implements OnInit,OnDestroy{
     private storageService: StorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) {
     this.subscription = new Subscription();
   }
@@ -73,6 +75,11 @@ export class WorkRatingComponent implements OnInit,OnDestroy{
     else{
       this.mainFuncService.downloadFile(fileName)
     }
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

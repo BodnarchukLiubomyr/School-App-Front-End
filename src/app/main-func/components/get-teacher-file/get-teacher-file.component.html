@@ -1,8 +1,7 @@
 <div *ngIf="fileWorks && fileWorks.length > 0; else noFileWorks">
-  <h2>File Works</h2>
   <ul>
     <li *ngFor="let fileWork of fileWorks">
-      <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)">{{ fileWork.fileName }}</a>
+      <a href="javascript:void(0)" (click)="downloadFile(fileWork.fileName)"><strong>{{ fileWork.fileName }}</strong></a>
     </li>
   </ul>
 </div>

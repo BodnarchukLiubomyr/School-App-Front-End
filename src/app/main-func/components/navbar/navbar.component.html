@@ -12,19 +12,21 @@
   </a>
   <div class="content">
     <div class="menu">
-      <ng-container *ngIf="isTeacher(); else userLinks" class="teacher-links">
+      <ng-container *ngIf="isTeacher()" class="teacher-links">
         <a routerLink="/create-exercise">Create Exercise</a>
         <a routerLink="/create-group">Create Group</a>
         <a routerLink="/add-user-to-group">Add User to Group</a>
         <a [routerLink]="['/get-chats', userId]">Get chats</a>
         <a [routerLink]="['/create-chat', userId]">Create chat</a>
       </ng-container>
-      <ng-template #userLinks>
-        <div class="user-links">
-          <a [routerLink]="['/get-chats', userId]">Get chats</a>
-          <a [routerLink]="['/create-chat', userId]">Create chat</a>
-        </div>
-      </ng-template>
+      <ng-container *ngIf="isAdmin()" class="admin-links">
+        <a [routerLink]="['/get-chats', userId]">Get chats</a>
+        <a [routerLink]="['/create-chat', userId]">Create chat</a>
+      </ng-container>
+      <ng-container *ngIf="isStudent()" class="student-links">
+        <a [routerLink]="['/get-chats', userId]">Get chats</a>
+        <a [routerLink]="['/create-chat', userId]">Create chat</a>
+      </ng-container>
     </div>
 
     <div *ngIf="isLoggedIn()" class="dropdown">

@@ -80,7 +80,6 @@ export class GetGroupComponent implements OnInit,OnDestroy{
     // [routerLink]="['/delete-group', group.groupName]"
   }
 
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

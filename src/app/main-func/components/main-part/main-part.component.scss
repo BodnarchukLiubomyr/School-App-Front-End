@@ -1,20 +1,22 @@
 .button-separator {
-  height: 10px; /* Adjust the height as needed */
-  width: 100%;
+  width: 10px;
+}
+
+.row-separator{
+  height: 20px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .center-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; /* Set the container to full viewport height */
-}
-
-.column {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 20px; /* Adjust the margin between columns as needed */
 }
 
 .button {
@@ -36,4 +38,15 @@
   background-color: #006699;
   border-color: #006699;
   color: #FFFFFF;
+}
+
+.button-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.education-heading {
+  font-size: 18px;
+  margin-bottom: 10px;
 }

@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { regexValidator } from 'src/app/auth/directives/validation/multi-pattern.directive';
 import { MainFuncService } from 'src/app/main-func/services/main-func.service';
 import { StorageService } from 'src/app/shared';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-chat',
@@ -46,7 +47,8 @@ export class CreateChatComponent {
     private storageService: StorageService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    private location: Location) {
     this.subscription = new Subscription();
   }
 
@@ -73,6 +75,11 @@ export class CreateChatComponent {
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

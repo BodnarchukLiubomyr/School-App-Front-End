@@ -27,7 +27,9 @@ import {
   GetClassStudentsComponent,
   DeleteGroupComponent,
   DeleteExerciseComponent,
-  GetMarkComponent
+  GetMarkComponent,
+  FindClassComponent,
+  GetClassComponent
 } from './index'
 import { MaterialModule } from '../material.module';
 
@@ -57,7 +59,9 @@ import { MaterialModule } from '../material.module';
     GetClassStudentsComponent,
     DeleteGroupComponent,
     DeleteExerciseComponent,
-    GetMarkComponent
+    GetMarkComponent,
+    FindClassComponent,
+    GetClassComponent
   ],
   imports: [
     CommonModule,
