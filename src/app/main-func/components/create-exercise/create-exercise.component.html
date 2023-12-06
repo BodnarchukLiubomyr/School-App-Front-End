@@ -123,6 +123,9 @@
           <button type="submit" [disabled]="!form.valid" class="button" [class.disabled]="form.invalid">
             <h3 class="link-text text-white">Create</h3>
           </button>
+          <button class="button-white" (click)="goBack($event)">
+            <h3 class="link-text text-blue">Back</h3>
+          </button>
         </div>
       </div>
     </form>

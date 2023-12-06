@@ -1,6 +1,6 @@
 <div *ngIf="schoolClass && schoolClass.length > 0; else noSchoolClass">
-  <p>{{schoolClass.name}}</p>
-  <h2>School class users</h2>
+  <h2>School class</h2>
+  <p>{{className}}</p>
   <button routerLink="/main-part" class="button-white">
     <h3 class="link-text text-blue">Back</h3>
   </button>
@@ -11,6 +11,7 @@
         <th>Last Name</th>
         <th>First Name</th>
         <th>Email</th>
+        <th>Delete</th>
       </tr>
     </thead>
       <tbody>
@@ -18,6 +19,9 @@
             <td>{{ user.lastname }}</td>
             <td>{{ user.firstname }}</td>
             <td>{{ user.email }}</td>
+            <td>
+              <button (click)="onDelete(user.lastname,user.firstname)" class="delete-button">Delete user</button>
+            </td>
           </tr>
       </tbody>
     </table>
@@ -31,4 +35,3 @@
 <div *ngIf="errorMessage">
   <p>Error: {{ errorMessage }}</p>
 </div>
-

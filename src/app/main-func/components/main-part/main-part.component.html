@@ -5,25 +5,29 @@
 <app-subjects></app-subjects>
 
 <div class="center-container" *ngIf="isAdmin()">
-  <ng-container *ngIf="isAdmin()">
-    <div class="column" *ngIf="isAdmin()">
-      <p>Education</p>
+  <div class="button-container">
+    <p class="education-heading">Education</p>
+    <div class="button-row">
+      <div class="row-separator"></div>
       <button class="button" (click)="navigateToCreateClass()" *ngIf="isAdmin()">Create class</button>
       <div class="button-separator"></div>
       <button class="button" (click)="navigateToAddUserToClass()" *ngIf="isAdmin()">Add student to class</button>
+      <div class="button-separator"></div>
+      <button class="button" (click)="navigateToFindClass()" *ngIf="isAdmin()">Find class</button>
       <div class="button-separator"></div>
       <button class="button" (click)="transferUsers()" *ngIf="isAdmin()">Transfer students to next classes</button>
       <div class="button-separator"></div>
       <button class="button" (click)="navigateToCreateSubject()" *ngIf="isAdmin">Create subject</button>
     </div>
-
-    <div class="column" *ngIf="isAdmin()">
-      <p>Registration</p>
+    <div class="row-separator"></div>
+    <p class="education-heading">Registration</p>
+    <div class="button-row">
+      <div class="row-separator"></div>
       <!-- <button class="button" (click)="navigateToWorkWithClass()" *ngIf="isAdmin()">Work with class</button>
       <div class="button-separator"></div> -->
       <button class="button" (click)="navigateToSignUpUser()" *ngIf="isAdmin()">Sign-up user</button>
       <div class="button-separator"></div>
       <button class="button" (click)="navigateToSignUpTeacher()" *ngIf="isAdmin()">Sign-up teacher</button>
     </div>
-  </ng-container>
+  </div>
 </div>

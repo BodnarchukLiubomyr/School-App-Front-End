@@ -10,28 +10,32 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
   styleUrls: ['./delete-user.component.scss']
 })
 export class DeleteUserComponent {
-  @Input() userName: string = '';
+  lastname = '';
+  firstname = '';
 
   constructor(
-    private mainfuncService: MainFuncService,
-    private storageService: StorageService,
+    private mainFuncService: MainFuncService,
     public dialog: MatDialogRef<MainPartComponent>,
 
-    @Inject(MAT_DIALOG_DATA) public data:any)
-    {
-      this.userName = data.name;
-    }
+    @Inject(MAT_DIALOG_DATA) public data:any,
+    public dialogRef: MatDialogRef<DeleteUserComponent>)
+  {}
 
-  onDeleteUser() : void{
-    this.mainfuncService.deleteUser(this.storageService.getUser().email,this.storageService.getUser().token).subscribe(
-      {
-        next: data => {
-          console.log(data);
-          window.location.reload();
-        }
-      }
-    );
-    console.log("onDeleteUser");
+  ngOnInit(): void {
+    this.lastname = this.data.lastname;
+    this.firstname = this.data.firstname;
+  }
+
+  deleteUser() : void{
+    this.mainFuncService.deleteUser(this.lastname,this.firstname).subscribe({
+      next: (data) => {
+        console.log(data);
+        window.location.reload();
+      },
+      error: (err) => {
+        console.error(err);
+      },
+    });
   }
 
   onClose(){

@@ -84,6 +84,12 @@ export class SubjectViewComponent implements OnInit,OnDestroy{
     return userRole === 'TEACHER';
   }
 
+  isStudent(): boolean {
+    const userRole = this.storageService.getUser().role;
+    console.log("Role:",userRole);
+    return userRole === 'STUDENT';
+  }
+
   showError(message: string): void {
     console.error('Error:', message);
     this.errorMessage = 'Error: ' + message;

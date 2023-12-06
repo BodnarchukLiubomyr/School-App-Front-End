@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { StorageService } from 'src/app/shared';
 import { MainFuncService } from '../../services/main-func.service';
 import { Subscription } from 'rxjs';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-group-chat',
@@ -23,7 +24,8 @@ export class GroupChatComponent implements OnInit, OnDestroy{
   constructor(
     private route: ActivatedRoute,
     private mainFuncService: MainFuncService,
-    private storageService: StorageService)
+    private storageService: StorageService,
+    private location:Location)
     {
       this.subscription = new Subscription();
     }
@@ -94,6 +96,11 @@ export class GroupChatComponent implements OnInit, OnDestroy{
         }
       }
     );
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

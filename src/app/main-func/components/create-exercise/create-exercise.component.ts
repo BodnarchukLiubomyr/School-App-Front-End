@@ -3,7 +3,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from '../../services/main-func.service';
-import { regexValidator } from 'src/app/auth/directives/validation/multi-pattern.directive';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-exercise',
@@ -52,7 +52,8 @@ export class CreateExerciseComponent implements OnDestroy{
   constructor(
     private mainFuncService: MainFuncService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   closeErrorAlert() {
@@ -74,6 +75,11 @@ export class CreateExerciseComponent implements OnDestroy{
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

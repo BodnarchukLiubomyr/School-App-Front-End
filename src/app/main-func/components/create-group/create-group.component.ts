@@ -3,6 +3,7 @@ import { Validators, FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from '../../services/main-func.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-group',
@@ -39,7 +40,8 @@ export class CreateGroupComponent {
   constructor(
     private mainFuncService: MainFuncService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   closeErrorAlert() {
@@ -61,6 +63,11 @@ export class CreateGroupComponent {
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

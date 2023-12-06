@@ -51,13 +51,17 @@ export class MainFuncService {
     );
   }
 
-  deleteUser(email: string, token: string): Observable<any>{
+  deleteUser(lastname:string,firstname: string):Observable<any>{
     return this.http.delete(
-      this.backendApi + '/api/v1/school-app/delete-user/' + email,
-      {
-        headers: new HttpHeaders({ 'Authorization': 'Bearer ' + token }),
-        responseType: 'json'
-      }
+      this.backendApi + '/api/v1/school-app/delete-user/'+ lastname + '/'+ firstname,
+      {responseType:'json'}
+    )
+  }
+
+  getClass(className: string):Observable<any>{
+    return this.http.get(
+      this.backendApi + '/api/v1/school-app/get-class/'+ className,
+      {responseType: 'json'}
     );
   }
 
@@ -156,7 +160,7 @@ export class MainFuncService {
     )
   }
 
-  deleteExerise(exerciseName:string):Observable<any>{
+  deleteExercise(exerciseName:string):Observable<any>{
     return this.http.delete(
       this.backendApi + '/api/v1/school-app/delete-exercise/'+ exerciseName,
       {responseType:'json'}
@@ -207,9 +211,9 @@ export class MainFuncService {
     )
   }
 
-  getMark(userId: string):Observable<any>{
+  getMark(userId: string,exerciseId:string):Observable<any>{
     return this.http.get(
-      this.backendApi + '/api/v1/school-app/get-mark/'+ userId,
+      this.backendApi + '/api/v1/school-app/get-mark/'+ userId+'/'+ exerciseId,
       {responseType: "json"}
     )
   }

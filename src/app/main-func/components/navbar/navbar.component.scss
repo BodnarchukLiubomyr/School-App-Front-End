@@ -72,13 +72,18 @@
 }
 
 .teacher-links a {
-  font-size: 18px; /* Adjust the font size as needed */
-  margin-right: 40px; /* Adjust the right margin as needed */
+  font-size: 18px;
+  margin-right: 40px;
 }
 
-.user-links a {
-  font-size: 18px; /* Adjust the font size as needed */
-  margin-right: 40px; /* Adjust the right margin as needed */
+.student-links a {
+  font-size: 18px;
+  margin-right: 40px;
+}
+
+.admin-links a {
+  font-size: 18px;
+  margin-right: 40px;
 }
 
 .menu {
@@ -99,7 +104,7 @@
 
 .dropdown-items-container {
   display: flex;
-  width: 180px;
+  width: 190px;
   justify-content: flex-end;
   align-items: flex-start;
   gap: 8px;
@@ -108,7 +113,7 @@
 .dropdown-menu {
   position: absolute;
   top: 70px;
-  width: 180px;
+  width: 190px;
   height: 120px;
   z-index: 10;
 

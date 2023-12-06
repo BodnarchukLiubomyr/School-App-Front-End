@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { MainFuncService } from '../../services/main-func.service';
-import { forbiddenDomain } from 'src/app/auth/directives/validation/forbidden-domain.directive';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-create-subject',
@@ -22,8 +22,7 @@ export class CreateSubjectComponent {
     email: ['', {
       validators: [
         Validators.required,
-        Validators.pattern(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$/),
-        forbiddenDomain(/\w+@epam\.com$/i)
+        Validators.pattern(/^(?=.{1,64}@)[A-Za-z0-9_-]+(\.[A-Za-z0-9_-]+)*@[^-][A-Za-z0-9-]+(\.[A-Za-z0-9-]+)*(\.[A-Za-z]{2,})$/)
       ]
     }],
     className: ['', {
@@ -42,7 +41,8 @@ export class CreateSubjectComponent {
   constructor(
     private mainFuncService: MainFuncService,
     private router: Router,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private location: Location
   ) { }
 
   closeErrorAlert() {
@@ -64,6 +64,11 @@ export class CreateSubjectComponent {
         }
       }
     })
+  }
+
+  goBack(event: MouseEvent) {
+    event.preventDefault();
+    this.location.back();
   }
 
   ngOnDestroy(): void {

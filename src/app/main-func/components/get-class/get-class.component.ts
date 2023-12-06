@@ -1,17 +1,18 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder } from '@angular/forms';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { MainFuncService } from '../../services/main-func.service';
 import { StorageService } from 'src/app/shared';
+import { MainFuncService } from '../../services/main-func.service';
+import { DeleteUserComponent } from '../delete-user/delete-user.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
-  selector: 'app-get-class-students',
-  templateUrl: './get-class-students.component.html',
-  styleUrls: ['./get-class-students.component.scss']
+  selector: 'app-get-class',
+  templateUrl: './get-class.component.html',
+  styleUrls: ['./get-class.component.scss']
 })
-export class GetClassStudentsComponent implements OnInit,OnDestroy{
-
+export class GetClassComponent implements OnInit,OnDestroy{
   @Input() tasks: any[] = [];
   className: string | undefined;
   private subscription: Subscription;
@@ -25,8 +26,8 @@ export class GetClassStudentsComponent implements OnInit,OnDestroy{
     private mainFuncService: MainFuncService,
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder,
     private storageService: StorageService,
+    private dialog: MatDialog
   ) {
     this.subscription = new Subscription();
   }
@@ -61,12 +62,13 @@ export class GetClassStudentsComponent implements OnInit,OnDestroy{
     })
   }
 
-  sortedSchoolClassUsers() {
-    if (this.schoolClass && this.schoolClass.length > 0) {
-      return this.schoolClass[0].users.sort((a: { lastname: string }, b: { lastname: string }) => a.lastname.localeCompare(b.lastname));
-    } else {
-      return [];
-    }
+  onDelete(lastname: string,firstname: string): void{
+    this.dialog.open(DeleteUserComponent, {
+      data: {
+        lastname: lastname,
+        firstname: firstname
+    },
+    });
   }
 
   ngOnDestroy(): void {

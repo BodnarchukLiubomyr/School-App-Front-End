@@ -1,9 +1,10 @@
-<p>My group</p>
-<div *ngFor="let group of groups">
-  <button [routerLink]="['/group-chat', group.id]">{{group.groupName}}</button>
-  <button (click)="onDelete(group.groupName)">Delete group</button>
-</div>
-
-<div *ngIf="errorMessage">
-  <p>Error: {{ errorMessage }}</p>
+<div class="group-container">
+  <p>My group</p>
+  <div *ngFor="let group of groups" class="group-card">
+    <button [routerLink]="['/group-chat', group.id]">{{group.groupName}}</button>
+    <button class="delete-button" (click)="onDelete(group.groupName)" *ngIf="isTeacher()">Delete group</button>
+  </div>
+  <div *ngIf="errorMessage">
+    <p>Error: {{ errorMessage }}</p>
+  </div>
 </div>
